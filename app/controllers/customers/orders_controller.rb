@@ -1,4 +1,4 @@
-class Customer::OrdersController < ApplicationController
+class Customers::OrdersController < ApplicationController
 
   def new
     @order = Oder.new
