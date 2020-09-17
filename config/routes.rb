@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
   devise_for :customers
-    resources :categories, only: [:index, :edit, :create, :update]
-
-	devise_for :admins, controllers: {
-  		sessions: 'sessions'
-  	}
-  	# deviseではデフォルトで設定されるURLが存在するためnamespaseには含まない
+  devise_for :admins, controllers: {
+  	sessions: 'sessions'
+  }
+  
+  resources :orders, only:[:new, :create, :index, :show]
+  get "orders/confirm" => "orders#confirm",as: "confirm"
+  get "orders/thank" => "orders#thank",as: "thank"
+  post "orders/session" => "orders#session",as: "session"
+  
   namespace :admins do
-  	# namespaceでadmins内のルーティングを指定
-  	resources :customers, only:[:index,:show,:edit,:update]
-  	get 'home' => "homes#home",as: 'home'
+    resources :orders, only:[:index, :show, :update]
+    resources :customers, only:[:index,:show,:edit,:update]
+    resources :categories, only: [:index, :edit, :create, :update]
+    get 'home' => "homes#home",as: 'home'
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
