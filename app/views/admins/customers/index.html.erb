@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-9">
+			<h1>会員一覧</h1>
+			<table class="table">
+				<tr>
+					<th>会員ID</th><th>氏名</th><th>メールアドレス</th><th>ステータス</th>
+				</tr>
+				<% @customers.each do |customer| %>
+				<!-- 繰り返し処理にて全ての会員情報を表示 -->
+				<tr>
+					<td><%= customer.id %></td>
+					<td><%= link_to admins_customer_path(customer) do %>
+							<%= customer.first_name + customer.last_name %>
+						<% end %>
+					</td>
+					<!-- 名前をクリックして会員詳細に遷移（リンク先未実装） -->
+					<td><%= customer.email %></td>
+					<td><% if customer.is_member == true %>
+							有効
+						<% else %>
+							無効
+						<% end %>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
