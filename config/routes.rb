@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
   	sessions: 'sessions'
   }
-  
+
+  root 'homes#top'
+ 
   resources :orders, only:[:new, :create, :index, :show]
   get "orders/confirm" => "orders#confirm",as: "confirm"
   get "orders/thank" => "orders#thank",as: "thank"
