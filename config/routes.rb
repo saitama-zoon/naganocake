@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :customers
+    resources :categories, only: [:index, :edit, :create, :update]
+
 	devise_for :admins, controllers: {
   		sessions: 'sessions'
   	}
