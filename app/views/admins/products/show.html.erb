@@ -1,0 +1,27 @@
+<div class="row">
+  <%= form_with(model: @product, local: true) do |f| %>
+    <div col-md-2>
+      <h2>商品詳細</h2>
+      <%= f.attachment_image_tag @product, :image, :fill, 40, 40, format: 'jpeg' %>
+    </div>
+
+    <div col-md-8>
+      <% @products.each do |product| %>
+        <%= f.label :name, "商品名" %>
+        <%= product.name %>
+        <%= f.label :introduction, "商品説明" %>
+        <%= product.introduction %>
+        <%= f.label :name, "ジャンル" %>
+        <%= category_id %>
+        <%= f.label :price, "税抜価格" %>
+        <%= product.price %>
+        <%= f.label :is_sale_status, "販売ステータス" %>
+        <%= product.is_sale_status %>
+      <% end %>
+    </div>
+
+    <div col-md-2>
+     <%= f.submit "編集する" %>
+    </div>
+  <% end %>
+</div>
