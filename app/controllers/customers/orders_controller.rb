@@ -1,7 +1,7 @@
 class Customers::OrdersController < ApplicationController
 
   def new
-    @order = Oder.new
+    @order = Order.new
   end
 
   def create

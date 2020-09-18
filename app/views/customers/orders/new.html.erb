@@ -1,0 +1,45 @@
+<!-- Bootstrapのclass  要調整 -->
+<div class="col-lg-10 offset-1 space">
+  <div class="row">
+    <div class="col-lg-4">
+      <h2>注文情報入力</h2>
+    </div>
+  </div>
+
+  <%= form_with(model: @order, local: true, url: {action: 'confirm'}) do |f| %>
+    <div class="row space">
+      <h3><strong><%= f.label :支払い方法 %></strong></h3>
+    </div>
+    <!-- 支払い方法選択ラジオボタン -->
+    <div class="row field">
+      <div class="col-lg-4 btn-group" data-togle="buttons">
+        <label class="btn btn-outline-secondary active" style="width: 50%">
+          <!-- :how_to_pay, trueだと動作しない?　payment_methodか -->
+          <%= f.radio_button :how_to_pay, true, {checked: true} %>クレジットカード
+        </label>
+        <label class="btn btn-outline-secondary" style="width: 50%">
+          <%= f.radio_button :how_to_pay, false, {} %>銀行振込
+        </label>
+      </div>
+    </div>
+    <!-- 配送先入力フォーム -->
+    <div class="row space">
+      <h3><strong><%= f.label :お届け先 %></strong></h3>
+    </div>
+    <!-- 自身の住所 -->
+    <div class="row">
+      <p>
+        <label><%= f.radio_button :add, 1, checked: true,checked: "checked" %>
+          ご自身の住所
+        </label><br>
+        <!-- customers テーブル参照 -->
+        <%=  %>
+      </p>
+    </div>
+    <!-- 登録済み住所 -->
+    <!-- 新しい配送先 -->
+    <div class="actions row">
+      <%= f.submit class: "btn btn-primary col-xs-12" %>
+    </div>
+  <% end %>
+</div>
