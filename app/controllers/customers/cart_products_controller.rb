@@ -4,7 +4,7 @@ class Customers::CartProductsController < ApplicationController
 
 	def index
 		customer=current_customer
-		@cart_product=customer.cart_products
+		@cart_product=customer.cart_product.all
 	end
 
 	def creat
