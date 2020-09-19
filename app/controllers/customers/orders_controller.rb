@@ -19,9 +19,6 @@ class Customers::OrdersController < ApplicationController
   def confirm
   end
 
-  def session
-  end
-
   def thank
   end
 
