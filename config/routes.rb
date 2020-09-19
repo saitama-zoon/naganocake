@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     sessions: 'sessions'
   }
 
-  scope module:‘customers’ do
+  scope module: 'customers' do
+    root 'homes#top'
     get 'home' => "homes#top",as: 'home'
     get 'homes/about' => "homes#about",as: 'about'
     resource :'customers', only:[:show, :edit, :update]
