@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   }
 
   scope module: 'customers' do
-    root 'homes#top'
+    #root 'homes#top'
     get 'home' => "homes#top", as: 'home'
     get 'home/about' => "homes#about", as: 'about'
     resource :customers, only: [:show, :edit, :update]
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :'destinatons',only: [:index, :create, :edit, :update, :destroy]
     resources :'products',only: [:index,:show]
     resources :'cart_products', only: [:index, :create, :update, :destroy]
+    delete "cart_products" => "cart_products#destroy_all",as: "cart_products_destroy_all"
     resources :'orders', only: [:new, :create, :index, :show]
     get "orders/confirm" => "orders#confirm", as: "confirm"
     get "orders/thank" => "orders#thank", as: "thank"

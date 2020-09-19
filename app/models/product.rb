@@ -1,10 +1,10 @@
 class Product < ApplicationRecord
   #アソシエーション
-  belongs_to :category
-  has_many :cart_products
+  has_many :cart_products, dependent: :destroy
   has_many :customers, through: :cart_products
   has_many :order_products
   has_many :products, through: :order_products
+  belongs_to :category
   attachment :image
   #バリデーション
   validates :name, presence: true
