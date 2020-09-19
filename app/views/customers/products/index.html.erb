@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="category-section">
+      <h2>ジャンル検索</h2>
+        <div class="category-list">
+          <p>ケーキ</p>
+          <p>焼き菓子</p>
+          <p>プリン</p>
+          <p>キャンディ</p>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <h2>商品一覧</h2>
+      <% @products.each do |product| %>
+        <div class="box">
+          <%= attachment_image_tag @product, :image, :fill, 40, 40, format: 'jpeg' %>
+　　　　   <p>商品名<%= product.name %></p>
+　　　　   <p>¥<%= product.price %></p>
+        </div>
+      <% end %>
+  </div>
+</div>

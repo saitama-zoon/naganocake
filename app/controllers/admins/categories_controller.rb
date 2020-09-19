@@ -12,13 +12,13 @@ class Admins::CategoriesController < ApplicationController
   end
 
   def edit
-  	@category = Category.find[:id]
+  	@category = Category.find(params[:id])
   end
 
   def update
-  	@category = Category.find[:id]
+  	@category = Category.find(params[:id])
     @category.update
-    redirect_to category_path
+    redirect_to request.referer
   end
 
   private
