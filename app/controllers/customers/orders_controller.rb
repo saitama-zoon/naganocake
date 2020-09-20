@@ -1,8 +1,6 @@
 class Customers::OrdersController < ApplicationController
   before_action :authenticate_customer!
-  before_action :set_customer
 
-  #new viewからcofirm action宛に入力内容を送信
   def new
     @order = Order.new
     #これだと全部取得してしまう
@@ -81,6 +79,7 @@ class Customers::OrdersController < ApplicationController
     #:how_to_pay→new viewにて定義
     @order.payment_method = params[:order][:how_to_pay]
 
+<<<<<<< HEAD
     #送り先のラジオボタンによる選択
     #:add→new viewにて定義 受領する値:1~3にて処理分岐
     @add = params[:order][:add].to_i

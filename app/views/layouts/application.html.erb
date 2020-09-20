@@ -19,13 +19,21 @@
         <nav>
           <ul class="nav navbar-nav navbar-right ">
             <% if customer_signed_in? %>
-              <li><%= link_to 'マイページ', "#", class: '' %></li>
-              <li><%= link_to '商品一覧', "#", class: '' %></li>
-              <li><%= link_to 'カート', "#", class: '' %></li>
+
+              <li><%= link_to 'マイページ', customers_path, class: '' %></li>
+              <li><%= link_to '商品一覧', products_path, class: '' %></li>
+              <li><%= link_to 'カート', cart_products_path, class: '' %></li>
+
               <li><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: '' %></li>
+              <% elsif admin_signed_in? %>
+              <li><%= link_to '商品一覧', admins_products_path, class: '' %></li>
+              <li><%= link_to '会員一覧', admins_customers_path, class: '' %></li>
+              <li><%= link_to '注文履歴一覧', admins_orders_path, class: '' %></li>
+              <li><%= link_to 'ジャンル一覧', admins_categories_path, class: '' %></li>
+              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: '' %></li>
             <% else %>
               <li><%= link_to 'About', about_path, class: '' %></li>
-              <li><%= link_to '商品一覧', "#", class: '' %></li>
+              <li><%= link_to '商品一覧', products_path, class: '' %></li>
               <li><%= link_to '新規登録', new_customer_registration_path, class: '' %></li>
               <li><%= link_to 'ログイン', new_customer_session_path, class: '' %></li>
             <% end %>

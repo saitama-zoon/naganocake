@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   devise_for :customers, controllers: {
-    sessions: 'customers/sessions', registrations: 'customers/registrations', passwords: 'customers/passwords'
+    sessions: 'customers/sessions',
+    registrations: 'customers/registrations',
+    passwords: 'customers/passwords'
   }
 
   devise_for :admins, controllers: {
@@ -31,12 +33,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admins do
-    resources :orders, only:[:index, :show, :update]
-    resources :customers, only:[:index,:show,:edit,:update]
+    resources :orders, only: [:index, :show, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :products, only: [:index, :show, :new, :create, :edit, :update]
     resources :categories, only: [:index, :edit, :create, :update]
-    resources :products, only: [:index, :new, :show, :create, :update, :edit]
     resources :order_products, only: [:update]
-    get 'home' => "homes#home",as: 'home'
+    get 'home' => "homes#home", as: 'home'
   end
 end
-
