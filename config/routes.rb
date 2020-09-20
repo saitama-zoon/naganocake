@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :'orders', only:[:new, :create, :index, :show]
     get "orders/confirm" => "orders#confirm",as: "confirm"
     get "orders/thank" => "orders#thank",as: "thank"
-    post "orders/session" => "orders#session",as: "session"
+    #post "orders/session" => "orders#session",as: "session"
   end
 
   devise_scope :customers do

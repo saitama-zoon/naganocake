@@ -1,5 +1,5 @@
 <!-- Bootstrapのclass  要調整 -->
-<div class="col-lg-10 offset-1 space">
+<div class="col-lg-10 ">
   <div class="row">
     <div class="col-lg-4">
       <h2>注文情報入力</h2>
@@ -14,7 +14,7 @@
     <div class="row field">
       <div class="col-lg-4 btn-group" data-togle="buttons">
         <label class="btn btn-outline-secondary active" style="width: 50%">
-          <!-- :how_to_pay, trueだと動作しない?　payment_methodか -->
+          <!-- :how_to_pay→confirm actionへparamを渡す -->
           <%= f.radio_button :how_to_pay, true, {checked: true} %>クレジットカード
         </label>
         <label class="btn btn-outline-secondary" style="width: 50%">
@@ -23,7 +23,7 @@
       </div>
     </div>
     <!-- 配送先入力フォーム -->
-    <div class="row space">
+    <div class="row">
       <h3><strong><%= f.label :お届け先 %></strong></h3>
     </div>
     <!-- 自身の住所 -->
@@ -32,14 +32,66 @@
         <label><%= f.radio_button :add, 1, checked: true,checked: "checked" %>
           ご自身の住所
         </label><br>
-        <!-- customers テーブル参照 -->
-        <%=  %>
+        <!-- customers(current_customer) テーブルより出力 -->
+        <%= @customer.post_code %>
+        <%= @customer.address %>
+        <%= @customer.first_name + @customer.last_name %>
       </p>
     </div>
     <!-- 登録済み住所 -->
-    <!-- 新しい配送先 -->
-    <div class="actions row">
-      <%= f.submit class: "btn btn-primary col-xs-12" %>
+    <div class="row">
+      <p>
+        <label>
+          <%= f.radio_button :add, 2, style: "" %>登録住所から選択
+        </label><br>
+        <!-- プルダウン機能 :send_to_address→confirm actionへparamを渡す -->
+        <!-- ### 要動作確認 ### -->
+        <%= f.collection_select :send_adress, @customer.address, :id, :address %>
+      </p>
     </div>
+    <!-- 新しい配送先 -->
+    <div class="row">
+      <p>
+        <label>
+          <%= f.radio_button :add, 3, style: "" %>新しいお届け先
+        </label><br>
+      </p>
+      <div class="">
+        <!-- destinationモデルに対して編集 :new_add→comfirm actionへparamを渡す -->
+        <%= f.fields_for :new_add do |add|%>
+          <div class="row">
+            <div class="">
+              <p>郵便番号(ハイフンなし)</p>
+            </div>
+            <div class="">
+              <%= add.text_field :post_code, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="">
+              <p>住所</p>
+            </div>
+            <div class="">
+              <%= add.text_field :adress, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="">
+              <p>宛名</p>
+            </div>
+            <div class="">
+              <%= add.text_field :name, class: "form-control" %>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- 確認画面へ進むボタン -->
+    <div class="actions row">
+      <%= f.submit "確認画面へ進む",class: "btn btn-primary col-xs-12" %>
+    </div>
+
   <% end %>
 </div>

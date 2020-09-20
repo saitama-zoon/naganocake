@@ -8,7 +8,7 @@ class Customers::OrdersController < ApplicationController
   end
 
   def create
-    if current_customer.cart_products.exists?
+    if current_customer.cart.exists?
       @order = Order.new(order_params)
       @order.customer_id = current_customet.id
 
@@ -16,16 +16,17 @@ class Customers::OrdersController < ApplicationController
       case @add
         when 1
           @order.post_code = @customer.post_code
-          @order.send_to_address = @customer.address
-          @order.addressee = @customer.first_name + @customer.last_name
+          @order.address = @customer.address
+          @order.name = @customer.first_name + @customer.last_name
         when 2
-         @order.post_code = params[:order][:post_code]
-          @order.send_to_address = params[:order][:send_to_address]
-          @order.addressee = params[:order][:addressee]
+          @order.post_code = params[:order][:post_code]
+          #@order.send_to_address = params[:order][]
+          @order.address = params[:order][:send_to_address]
+          @order.name = params[:order][:addressee]
         when 3
           @order.post_code = params[:order][:post_code]
-          @order.send_to_address = params[:order][:send_to_address]
-          @order.addressee = params[:order][:addressee]
+          @order.address = params[:order][:send_to_address]
+          @order.name = params[:order][:addressee]
       end
       @order.save
 
@@ -61,7 +62,7 @@ class Customers::OrdersController < ApplicationController
   end
 
   def show
-    @order = Oreder.find[params[:id]]
+    #@order = Order.find[params[:id]]
   end
 
   #?
@@ -72,17 +73,18 @@ class Customers::OrdersController < ApplicationController
   def confirm
     @order = Order.new
     @cart_products = current_customer.carts
-    @order.payment_method = params[:order][:payment_method]
+    #:how_to_pay→new viewにて定義
+    @order.payment_method = params[:order][:how_to_pay]
 
     #送り先のラジオボタンによる選択
     #:add→new viewにて定義 受領する値:1~3にて処理分岐
     @add = params[:order][:add].to_i
     #取得した値に対してcase文で条件分岐
     case @add
-    #自身の住所
+    ### 要動作確認 ###
 
       when 1
-        ### 要動作確認 ###
+        #自身の住所
         @order.postal_code = @customer.postal_code
         @order.address = @customer.address
         @order.name = @customer.first_name + @customer.last_name
