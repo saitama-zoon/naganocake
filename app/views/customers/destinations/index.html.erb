@@ -5,7 +5,7 @@
       <h3>配送先登録/一覧</h3>
       <%= form_for(@destination) do |f| %>
 		<h4>郵便番号(ハイフンなし）</h4>
-
+    <%= f.text_field :postal_code %>
 		<h4>住所</h4>
 		<%= f.text_field :address %>
 
@@ -26,7 +26,7 @@
     	<% @destinations.each do |destination| %>
         <tbody>
             <tr>
-              <td></td>
+              <td><%= destination.postal_code %></td>
               <td><%= destination.address %></td>
               <td><%= destination.name %></td>
               <td><%= link_to "Edit", edit_destination_path(destination.id) %></td>
