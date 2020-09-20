@@ -1,7 +1,8 @@
-class Admins::HomesController < ApplicationControlle
-
-  def home
+class Admins::HomesController < ApplicationController
+	before_action :authenticate_admin!
+	def home
 	end
-  
+
+
 end
 

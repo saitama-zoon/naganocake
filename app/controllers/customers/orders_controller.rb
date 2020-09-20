@@ -1,5 +1,5 @@
 class Customers::OrdersController < ApplicationController
-
+  before_action :authenticate_customer!
   def new
     @order = Oder.new
   end
@@ -17,9 +17,6 @@ class Customers::OrdersController < ApplicationController
   end
 
   def confirm
-  end
-
-  def session
   end
 
   def thank
