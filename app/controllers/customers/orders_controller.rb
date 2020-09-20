@@ -73,7 +73,7 @@ class Customers::OrdersController < ApplicationController
   def confirm
     @order = Order.new
     #current_customerのcar中身を代入
-    @cart_products = current_customer.Cart_products
+    @cart_products = current_customer.cart_products
     #@cart_products = Carts.find
 
     #:how_to_pay→new viewにて定義
