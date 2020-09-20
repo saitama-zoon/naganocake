@@ -1,3 +1,4 @@
 class Destination < ApplicationRecord
-	belong_to :customer
+
+  belongs_to :customer
 end
