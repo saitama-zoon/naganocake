@@ -4,34 +4,26 @@ Rails.application.routes.draw do
   }
 
   scope  module:'customers' do
-  get 'home' => "homes#top" ,as: 'home'
-  get 'homes/about' => "homes#about",as: 'about'
-  resource :customers, only:[:show, :edit, :update]
-  get "/withdrawal" => "customers#withdrawal",as: "withdrawal"
-  # 退会画面の表示
-  patch "/withdeawal" => "customers#hide",as: "hide"
-  # 退会処理アクション
-  resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
-  resources :products,only:[:index,:show]
-  resources :cart_products, only:[:index, :create, :update, :destroy]
-  delete "cart_products" => "cart_products#destroy_all",as: "cart_products_destroy_all"
-  resources :orders, only:[:new, :create, :index, :show]
-  get "orders/confirm" => "orders#confirm",as: "confirm"
-  get "orders/thank" => "orders#thank",as: "thank"
+    get 'home' => "homes#top" ,as: 'home'
+    get 'homes/about' => "homes#about",as: 'about'
+    resource :customers, only:[:show, :edit, :update]
+    get "/withdrawal" => "customers#withdrawal",as: "withdrawal"
+    # 退会画面の表示
+    patch "/withdeawal" => "customers#hide",as: "hide"
+    # 退会処理アクション
+    resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
+    resources :products,only:[:index,:show]
+    resources :cart_products, only:[:index, :create, :update, :destroy]
+    delete "cart_products" => "cart_products#destroy_all",as: "cart_products_destroy_all"
+    resources :orders, only:[:new, :create, :index, :show]
+    get "orders/confirm" => "orders#confirm",as: "confirm"
+    get "orders/thank" => "orders#thank",as: "thank"
   end
 
   devise_scope :customers do
     delete 'customers/sign_out' => 'customers/sessions#destroy', as: 'destroy_customers_session'
   end
 
-  resource :customer do
-    member do
-      get "check"
-      #ユーザーの会員状況を取得
-      patch "withdrawl"
-      #ユーザーの会員状況を更新
-    end
-  end
 
     devise_for :admins, controllers: {
     sessions: 'admins/sessions'
