@@ -24,8 +24,18 @@ Rails.application.routes.draw do
     delete 'customers/sign_out' => 'customers/sessions#destroy', as: 'destroy_customers_session'
   end
 
+  resource :customer do
+    member do
+      get "check"
+      #ユーザーの会員状況を取得
+      patch "withdrawl"
+      #ユーザーの会員状況を更新
+    end
+  end
+
     devise_for :admins, controllers: {
     sessions: 'admins/sessions'
+
   }
 
   namespace :admins do
