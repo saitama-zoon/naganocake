@@ -5,6 +5,8 @@ class Customers::OrdersController < ApplicationController
   #new viewからcofirm action宛に入力内容を送信
   def new
     @order = Order.new
+    #これだと全部取得してしまう
+    @customer_address = Destination.all
   end
 
   def create
@@ -41,7 +43,7 @@ class Customers::OrdersController < ApplicationController
       end
 
         # cartの内容をorder_productに新規登録
-        current_customer.cart_items.each do |cart_puroduct|
+        current_customer.cart_puroducts.each do |cart_puroduct|
           order_product = @order.order_items.build
           order_product.order_id = @order.id
           order_product.product_id = cart_puroduct.product_id
@@ -51,7 +53,7 @@ class Customers::OrdersController < ApplicationController
           #order_productに情報を移したらcart_puroductは消去
           cart_puroduct.destroy
         end
-        render :thanks
+        render :thank
     else
       redirect_to customer_top_path　flash[:danger] = 'カート空'
     end
@@ -72,7 +74,10 @@ class Customers::OrdersController < ApplicationController
   #new viewから入力値を受け取り条件に合わせて分岐処理
   def confirm
     @order = Order.new
-    @cart_products = current_customer.carts
+    #current_customerのcar中身を代入
+    @cart_products = current_customer.Cart_products
+    #@cart_products = Carts.find
+
     #:how_to_pay→new viewにて定義
     @order.payment_method = params[:order][:how_to_pay]
 
@@ -110,8 +115,8 @@ class Customers::OrdersController < ApplicationController
   end
 
   #session actionは使用せずに処理可能かも?
-  def session
-  end
+  #def session
+  #end
 
   #注文完了画面を表示するのみ
   def thank

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :'products',only:[:index,:show]
     resources :'cart_products', only:[:index, :create, :update, :destroy]
     resources :'orders', only:[:new, :create, :index, :show]
-    get "orders/confirm" => "orders#confirm",as: "confirm"
+    post "orders/confirm" => "orders#confirm",as: "confirm"
     get "orders/thank" => "orders#thank",as: "thank"
     #post "orders/session" => "orders#session",as: "session"
   end

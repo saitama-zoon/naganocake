@@ -1,5 +1,5 @@
 <!-- Bootstrapのclass  要調整 -->
-<div class="col-lg-10 ">
+<div class=" container ">
   <div class="row">
     <div class="col-lg-4">
       <h2>注文情報入力</h2>
@@ -13,13 +13,17 @@
     <!-- 支払い方法選択ラジオボタン -->
     <div class="row field">
       <div class="col-lg-4 btn-group" data-togle="buttons">
-        <label class="btn btn-outline-secondary active" style="width: 50%">
-          <!-- :how_to_pay→confirm actionへparamを渡す -->
-          <%= f.radio_button :how_to_pay, true, {checked: true} %>クレジットカード
-        </label>
-        <label class="btn btn-outline-secondary" style="width: 50%">
-          <%= f.radio_button :how_to_pay, false, {} %>銀行振込
-        </label>
+        <p>
+          <label class="btn btn-outline-secondary active" style="width: 50%">
+            <!-- :how_to_pay→confirm actionへparamを渡す -->
+            <%= f.radio_button :how_to_pay, true, {checked: true} %>クレジットカード
+          </label>
+        </p>
+        <p>
+          <label class="btn btn-outline-secondary" style="width: 50%">
+            <%= f.radio_button :how_to_pay, false, {} %>銀行振込
+          </label>
+        </p>
       </div>
     </div>
     <!-- 配送先入力フォーム -->
@@ -33,9 +37,10 @@
           ご自身の住所
         </label><br>
         <!-- customers(current_customer) テーブルより出力 -->
-        <%= @customer.post_code %>
+        <%= @customer.postal_code %>
         <%= @customer.address %>
-        <%= @customer.first_name + @customer.last_name %>
+        <!-- 顧客名 -->
+        <%= @customer.first_name %><%= @customer.last_name %>
       </p>
     </div>
     <!-- 登録済み住所 -->
@@ -46,7 +51,7 @@
         </label><br>
         <!-- プルダウン機能 :send_to_address→confirm actionへparamを渡す -->
         <!-- ### 要動作確認 ### -->
-        <%= f.collection_select :send_adress, @customer.address, :id, :address %>
+        <%= f.collection_select :send_to_adress, @customer_address, :id, :address %>
       </p>
     </div>
     <!-- 新しい配送先 -->
@@ -85,13 +90,13 @@
               <%= add.text_field :name, class: "form-control" %>
             </div>
           </div>
+        <% end %>
       </div>
     </div>
 
     <!-- 確認画面へ進むボタン -->
     <div class="actions row">
-      <%= f.submit "確認画面へ進む",class: "btn btn-primary col-xs-12" %>
+      <%= f.submit "確認画面へ進む",class: "btn btn-primary" %>
     </div>
-
   <% end %>
 </div>
