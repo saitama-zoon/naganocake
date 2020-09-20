@@ -1,4 +1,6 @@
 class Customers::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+  before_action :set_customer
 
   #new viewからcofirm action宛に入力内容を送信
   def new
@@ -6,6 +8,52 @@ class Customers::OrdersController < ApplicationController
   end
 
   def create
+    if current_customer.cart_products.exists?
+      @order = Order.new(order_params)
+      @order.customer_id = current_customet.id
+
+      #送り先情報をorderへ保存
+      case @add
+        when 1
+          @order.post_code = @customer.post_code
+          @order.send_to_address = @customer.address
+          @order.addressee = @customer.first_name + @customer.last_name
+        when 2
+         @order.post_code = params[:order][:post_code]
+          @order.send_to_address = params[:order][:send_to_address]
+          @order.addressee = params[:order][:addressee]
+        when 3
+          @order.post_code = params[:order][:post_code]
+          @order.send_to_address = params[:order][:send_to_address]
+          @order.addressee = params[:order][:addressee]
+      end
+      @order.save
+
+      #dstnationモデル検索、未登録時に新規登録
+      if Destination.find_by(address: @order.send_to_address).nil?
+        @destination = Destination.new
+        @destination.post_code = @order.post_code
+        @destination.address = @order.send_to_address
+        @destination.name = @order.name
+        @destination.customer_id = current_customer.id
+        @destination.save
+      end
+
+        # cartの内容をorder_productに新規登録
+        current_customer.cart_items.each do |cart_puroduct|
+          order_product = @order.order_items.build
+          order_product.order_id = @order.id
+          order_product.product_id = cart_puroduct.product_id
+          order_product.quantity = cart_puroduct.quantity
+          order_product.order_price = cart_puroduct.product.price
+          order_product.save
+          #order_productに情報を移したらcart_puroductは消去
+          cart_puroduct.destroy
+        end
+        render :thanks
+    else
+      redirect_to customer_top_path　flash[:danger] = 'カート空'
+    end
   end
 
   def index
@@ -13,6 +61,7 @@ class Customers::OrdersController < ApplicationController
   end
 
   def show
+    @order = Oreder.find[params[:id]]
   end
 
   #?
@@ -62,6 +111,7 @@ class Customers::OrdersController < ApplicationController
   def session
   end
 
+  #注文完了画面を表示するのみ
   def thank
   end
 
