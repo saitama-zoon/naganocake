@@ -5,12 +5,16 @@ class Customers::CustomersController < ApplicationController
 
   def withdrawl
     @customer = current_customer
+  end
+
+  def hide
+    @customer = current_customer
     #現在ログインしているユーザーを@customerに格納
-    @customer.update(is_dactive: "Invalid")
+    @customer.update(is_member: "Invalid")
     #updateで登録情報をInvalidに変更
     reset_session
     #sessionIDのresetを行う
-    redirect_to root_path
+    redirect_to home_path
     #指定されたrootへのpath
   end
 

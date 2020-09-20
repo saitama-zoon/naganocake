@@ -3,12 +3,14 @@ Rails.application.routes.draw do
     sessions: 'customers/sessions', registrations: 'customers/registrations', passwords: 'customers/passwords'
   }
 
-
-  get 'home' => "customers/homes#top",as: 'home'
+  get '/' => "customers/homes#top",as: 'home'
   get 'homes/about' => "customers/homes#about",as: 'about'
 
   scope module: 'customers' do
-  resource :customer, only:[:show, :edit, :update]
+    resource :customer, only:[:show, :edit, :update]
+    get 'customer/withdrawl'=> "customers#withdrawl"
+    patch 'customer/withdrawl' => "customers#hide"
+    resources :destinations, only:[:index, :create, :show, :edit, :update, :destroy]
   end
 
   get "orders/confirm" => "customers/orders#confirm",as: "confirm"
@@ -16,15 +18,6 @@ Rails.application.routes.draw do
 
   devise_scope :customers do
     delete 'customers/sign_out' => 'customers/sessions#destroy', as: 'destroy_customers_session'
-  end
-
-  resource :customer do
-    member do
-      get "check"
-      #ユーザーの会員状況を取得
-      patch "withdrawl"
-      #ユーザーの会員状況を更新
-    end
   end
 
   devise_for :admins, controllers: {
