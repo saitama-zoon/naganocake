@@ -7,7 +7,7 @@ class Customers::CartProductsController < ApplicationController
 		@total_price= @cart_products.sum(:price_with_tax)*1.1
 	end
 
-	def creat
+	def create
 		# カートに追加ボタンで実行、すでに同種類の商品が入っている場合は数量を追加
 		product = Product.find(params[:id])
 		if @cart_product.blank?

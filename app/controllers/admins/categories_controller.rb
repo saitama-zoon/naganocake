@@ -18,8 +18,8 @@ class Admins::CategoriesController < ApplicationController
 
   def update
   	@category = Category.find(params[:id])
-    @category.update
-    redirect_to request.referer
+    @category.update(category_params)
+    redirect_to admins_categories_path
   end
 
   private
