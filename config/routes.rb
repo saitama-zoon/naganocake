@@ -7,17 +7,13 @@ Rails.application.routes.draw do
   }
 
 
+  get '/' => "customers/homes#top",as: 'home'
+  get 'homes/about' => "customers/homes#about",as: 'about'
 
-  scope  module:'customers' do
-    get 'home' => "homes#top" ,as: 'home'
-    get 'homes/about' => "homes#about",as: 'about'
-    resource :customers, only:[:show, :edit, :update]
-
-    get "/withdrawal" => "customers#withdrawal",as: "withdrawal"
-    # 退会画面の表示
-    patch "/withdeawal" => "customers#hide",as: "hide"
-    # 退会処理アクション
-
+  scope module: 'customers' do
+    resource :customer, only:[:show, :edit, :update]
+    get 'customer/withdrawl'=> "customers#withdrawl"
+    patch 'customer/withdrawl' => "customers#hide"    
     resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
     resources :products,only:[:index,:show]
     resources :cart_products, only:[:index, :update, :destroy]

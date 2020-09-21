@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <h3>配送先編集</h3>
+
+      <%= form_for(@destination) do |f| %>
+   　   <table class="table">
+          <tbody>
+            <tr>
+              <td>郵便番号（ハイフンなし）</td>
+              <td><div class="field">
+              	    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+                  </div>
+              </td>
+            </tr>
+            <tr>
+              <td>住所</td>
+              <td><div class="field">
+                   <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+                  </div>
+              </td>
+            </tr>
+            <tr>
+              <td>宛名</td>
+              <td><div class="field">
+                    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+                  </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+		<%= f.submit "編集する"%>
+	  <% end %>
+
+    </div>
+  </div>
+</div>
