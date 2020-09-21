@@ -5,7 +5,7 @@ class CreateOrderProducts < ActiveRecord::Migration[5.2]
     	t.integer :order_id
     	t.integer :quantity
     	t.integer :price_with_tax
-    	t.integer :product_status
+    	t.integer :product_status,default: 0
 
       t.timestamps
     end

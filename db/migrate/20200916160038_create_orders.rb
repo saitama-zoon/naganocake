@@ -5,9 +5,9 @@ class CreateOrders < ActiveRecord::Migration[5.2]
     	t.string :name
     	t.string :postal_code
     	t.text :address
-    	t.integer :shipping
-    	t.integer :payment_method
-    	t.integer :order_status
+    	t.integer :shipping,default: 800
+    	t.integer :payment_method,default: 0
+    	t.integer :order_status,default: 0
       t.timestamps
     end
   end
