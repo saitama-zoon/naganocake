@@ -10,18 +10,17 @@ class Customers::CartProductsController < ApplicationController
 	def create
 		# カートに追加ボタンで実行、すでに同種類の商品が入っている場合は数量を追加
 		product = Product.find(params[:id])
-		#if @cart_product == blank
+		if @cart_product.blank?
 			@cart_product=CartProduct.new
 			@cart_product.customer_id = current_customer.id
 			@cart_product.product_id = product.id
-		#end
-		#end
-		#if @cart_product.quantity = nil
-			total_quantity = 1
-		#else
-			#total_quantity = @cart_product.quantity + 1
-		#end
-		@cart_product.quantity =  total_quantity
+		end
+		if @cart_product.quantity == nil
+			@cart_product.quantity = 1
+		else
+			total_quantity = @cart_product.quantity + 1
+			@cart_product.quantity =  total_quantity
+		end
 		@cart_product.save
 		redirect_to cart_products_path
 	end
