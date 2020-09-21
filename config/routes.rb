@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
 
   devise_for :admins, controllers: {
-    sessions: 'sessions'
+    sessions: 'admins/sessions'
   }
 
   scope module: 'customers' do
@@ -19,13 +19,17 @@ Rails.application.routes.draw do
     # 退会画面の表示
     patch "/withdeawal" => "customers#hide",as: "hide"
     # 退会処理アクション
-    resources :'destinatons',only:[:index, :create, :edit, :update, :destroy]
-    resources :'products',only:[:index,:show]
+    resources :'destinatons' ,only: [:index, :create, :edit, :update, :destroy]
+    resources :'products', only: [:index,:show] do
+      #ジャンル検索機能アクション
+      get :search, on: :collection
+    end
+
     resources :'cart_products', only:[:index, :create, :update, :destroy]
     resources :'orders', only:[:new, :create, :index, :show]
     post "orders/confirm" => "orders#confirm",as: "confirm"
     get "orders/thank" => "orders#thank",as: "thank"
-    #post "orders/session" => "orders#session",as: "session"
+    #post "orders/session" => "orders#session",as: "session
   end
 
   devise_scope :customers do
