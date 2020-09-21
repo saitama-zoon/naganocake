@@ -12,7 +12,9 @@
   <body>
 　　 <header class="navbar navbar-fixed-top navbar-default ">
       <div class="container p-4">
-
+       <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+       <% end %>
        <nav class="nav navbar-nav navbar-left">
          <%= link_to image_tag("logo.png", class: "image"), home_path %>
         </nav>

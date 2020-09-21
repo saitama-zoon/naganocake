@@ -1,10 +1,13 @@
 class Customers::OrdersController < ApplicationController
   before_action :authenticate_customer!
+  before_action :set_customer
+
 
   def new
     @order = Order.new
     #これだと全部取得してしまう
     @customer_address = Destination.all
+
   end
 
   def create
@@ -40,7 +43,6 @@ class Customers::OrdersController < ApplicationController
         @destination.save
       end
 
-        # cartの内容をorder_productに新規登録
         current_customer.cart_puroducts.each do |cart_puroduct|
           order_product = @order.order_items.build
           order_product.order_id = @order.id
@@ -51,7 +53,9 @@ class Customers::OrdersController < ApplicationController
           #order_productに情報を移したらcart_puroductは消去
           cart_puroduct.destroy
         end
+
         render :thank
+
     else
       redirect_to customer_top_path　flash[:danger] = 'カート空'
     end
@@ -72,6 +76,7 @@ class Customers::OrdersController < ApplicationController
   #new viewから入力値を受け取り条件に合わせて分岐処理
   def confirm
     @order = Order.new
+
     #current_customerのcar中身を代入
     @cart_products = current_customer.Cart_products
     #@cart_products = Carts.find
@@ -114,8 +119,7 @@ class Customers::OrdersController < ApplicationController
   end
 
   #session actionは使用せずに処理可能かも?
-  #def session
-  #end
+
 
   #注文完了画面を表示するのみ
   def thank
@@ -129,9 +133,12 @@ class Customers::OrdersController < ApplicationController
 
   #order_productsとの紐付け必要...
   def order_params
-    params.require(:order).oermit(
+
+    params.require(:order).permit(
+
       :create_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status
       )
   end
+
 
 end

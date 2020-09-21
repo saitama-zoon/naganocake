@@ -25,7 +25,6 @@
         <%= form_for @cart_product do |f| %>
           <%= f.select :quantity, options_for_select(1..10), include_blank: "個数を選択してください" %>
         <% end %>
-        <%= link_to "カートに入れる", cart_products_path %>
-    </div>
+        <%= link_to "カートに入れる",cart_products_create_path(@product) ,method: :POST %>
   </div>
 </div>
