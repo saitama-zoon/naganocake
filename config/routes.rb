@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
 
   devise_for :customers, controllers: {
-    sessions: 'customers/sessions', registrations: 'customers/registrations', passwords: 'customers/passwords'
+    sessions: 'customers/sessions',
+    registrations: 'customers/registrations',
+    passwords: 'customers/passwords'
   }
+
 
 
   scope  module:'customers' do
     get 'home' => "homes#top" ,as: 'home'
     get 'homes/about' => "homes#about",as: 'about'
     resource :customers, only:[:show, :edit, :update]
+
     get "/withdrawal" => "customers#withdrawal",as: "withdrawal"
     # 退会画面の表示
     patch "/withdeawal" => "customers#hide",as: "hide"
     # 退会処理アクション
+
     resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
     resources :products,only:[:index,:show]
     resources :cart_products, only:[:index, :update, :destroy]
@@ -22,6 +27,8 @@ Rails.application.routes.draw do
     resources :orders, only:[:new, :create, :index, :show]
     get "orders/confirm" => "orders#confirm",as: "confirm"
     get "orders/thank" => "orders#thank",as: "thank"
+    #post "orders/session" => "orders#session",as: "session"
+
   end
 
 

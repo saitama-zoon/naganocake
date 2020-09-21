@@ -1,0 +1,46 @@
+<div class="container ">
+  <div class="row">
+    <div class="row">
+      <h2>注文情報確認</h2>
+    </div>
+    <!-- HTMLとしてフォームを送信するには以下の記述らしい -->
+    <%= form_with(model: @order, local: true) do |f| %>
+
+    <div class="">
+      <div class="row">
+        <div class=""><h4>商品名</h4></div>
+        <div class=""><h4>単価（税込）</h4></div>
+        <div class=""><h4>数量</h4></div>
+        <div class="2"><h4>小計</h4></div>
+      </div>
+    </div>
+
+    <!-- current_customerのcart内容を表示   -->
+    <!-- 購入金額用関数 sum_all view上で定義して使用...？ -->
+    <% sum_all = 0 %>
+    <% @cart_products.each do |cart_product| %>
+      <!-- 商品情報ページへのlink作成する？ -->
+
+      <!-- 商品画像 -->
+      <div class="row">
+        <%= attachment_image_tag(cart_product.product, :image, :fill, 100, 100, fallback:  "") %>
+      </div>
+
+      <!-- 商品名 -->
+      <div class="row">
+        <%= cart_product.product.name %>
+      </div>
+
+      <!-- 商品数量 -->
+      <div class="row">
+        <%=  %>
+      </div>
+
+      <!-- 商品小計(個数*金額) -->
+      <div class="row">
+        <%= %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
