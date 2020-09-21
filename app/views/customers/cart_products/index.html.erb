@@ -16,6 +16,9 @@
 			<% end %>
 		</td>
 		<td>
+			<%= item.product.price*11/10*item.quantity %>
+		</td>
+		<td>
 			<%= link_to "削除する", cart_product_path(item),method: :delete %>
 		</td>
 	</tr>
