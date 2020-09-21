@@ -5,3 +5,4 @@ class AddColumnsToCartProducts < ActiveRecord::Migration[5.2]
     add_column :cart_products, :quantity, :integer
   end
 end
+

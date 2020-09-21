@@ -14,15 +14,15 @@ Rails.application.routes.draw do
     root 'homes#top'
     get 'home' => "homes#top",as: 'home'
     get 'homes/about' => "homes#about",as: 'about'
-    resource :'customers', only:[:show, :edit, :update]
+    resource :customers, only:[:show, :edit, :update]
     get "/withdrawal" => "customers#withdrawal",as: "withdrawal"
     # 退会画面の表示
     patch "/withdeawal" => "customers#hide",as: "hide"
     # 退会処理アクション
-    resources :'destinatons',only:[:index, :create, :edit, :update, :destroy]
-    resources :'products',only:[:index,:show]
-    resources :'cart_products', only:[:index, :create, :update, :destroy]
-    resources :'orders', only:[:new, :create, :index, :show]
+    resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
+    resources :products,only:[:index,:show]
+    resources :cart_products, only:[:index, :create, :update, :destroy]
+    resources :orders, only:[:new, :create, :index, :show]
     post "orders/confirm" => "orders#confirm",as: "confirm"
     get "orders/thank" => "orders#thank",as: "thank"
     #post "orders/session" => "orders#session",as: "session"
