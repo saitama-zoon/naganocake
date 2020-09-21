@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :admins, controllers: {
-    sessions: 'sessions'
+    sessions: 'admins/sessions'
   }
 
   namespace :admins do
