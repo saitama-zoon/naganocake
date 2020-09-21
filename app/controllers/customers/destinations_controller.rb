@@ -1,4 +1,6 @@
 class Customers::DestinationsController < ApplicationController
+  before_action :authenticate_customer!
+
   def show
   	@destination = Destination.find(params[:id])
   end
@@ -45,4 +47,5 @@ private
   def destination_params
 	  params.require(:destination).permit(:postal_code, :address, :name, :customer_id)
   end
+
 end
