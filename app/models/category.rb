@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-
+  #アソシエーション
   has_many :products
   #バリデーション
   validates :name, presence: true

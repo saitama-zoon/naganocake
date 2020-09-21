@@ -3,11 +3,11 @@ class Customers::CartProductsController < ApplicationController
 	before_action :setup_cart_product!, only: [:create]
 
 	def index
-		@cart_product=current_customer.cart_product.all
-		@total_price= @cart_products.sum(:price_with_tax)*1.1
+		@cart_products=current_customer.cart_products
+
 	end
 
-	def creat
+	def create
 		# カートに追加ボタンで実行、すでに同種類の商品が入っている場合は数量を追加
 		product = Product.find(params[:id])
 		if @cart_product.blank?

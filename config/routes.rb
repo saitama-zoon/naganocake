@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+
   devise_for :customers, controllers: {
     sessions: 'customers/sessions', registrations: 'customers/registrations', passwords: 'customers/passwords'
   }
+
 
   scope  module:'customers' do
     get 'home' => "homes#top" ,as: 'home'
@@ -20,22 +22,22 @@ Rails.application.routes.draw do
     get "orders/thank" => "orders#thank",as: "thank"
   end
 
+
+
+  devise_for :admins, controllers: {
+          sessions: 'admins/sessions'
+  }
+
   devise_scope :customers do
     delete 'customers/sign_out' => 'customers/sessions#destroy', as: 'destroy_customers_session'
   end
 
-
-    devise_for :admins, controllers: {
-    sessions: 'admins/sessions'
-
-  }
-
   namespace :admins do
-    resources :orders, only:[:index, :show, :update]
-    resources :customers, only:[:index,:show,:edit,:update]
+    resources :orders, only: [:index, :show, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :products, only: [:index, :show, :new, :create, :edit, :update]
     resources :categories, only: [:index, :edit, :create, :update]
-    resources :products, only: [:index, :new, :show, :create, :update, :edit]
     resources :order_products, only: [:update]
-    get 'home' => "homes#home",as: 'home'
+    get 'home' => "homes#home", as: 'home'
   end
 end
