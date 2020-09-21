@@ -20,27 +20,71 @@
     <% sum_all = 0 %>
     <% @cart_products.each do |cart_product| %>
       <!-- 商品情報ページへのlink作成する？ -->
-
-      <!-- 商品画像 -->
       <div class="row">
-        <%= attachment_image_tag(cart_product.product, :image, :fill, 100, 100, fallback:  "") %>
+        <!-- 商品画像 -->
+        <div class="row">
+          <%= attachment_image_tag(cart_product.product, :image, :fill, 100, 100, fallback:  "") %>
+        </div>
+
+        <!-- 商品名 -->
+        <div class="row">
+          <%= cart_product.product.name %>
+        </div>
+
+        <!-- 商品数量 -->
+        <div class="row">
+          <%= cart_product.product.quantity %>
+        </div>
+
+        <!-- 商品小計(個数*金額) -->
+        <div class="row">
+          <!-- 税込計算... -->
+          <%= cart_product.product.price * cart_product.product.quantity %>
+        </div>
       </div>
-
-      <!-- 商品名 -->
-      <div class="row">
-        <%= cart_product.product.name %>
+    <% end %>
+    <div class="row">
+      <div class="">
+        <div class="row">
+          <div class="col-gl-3">
+            <p>送料</p>
+          </div>
+          <div class="col-lg-3">
+            <%= @order.shipping %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-gl-3">
+            <p>商品合計</p>
+          </div>
+          <div class="col-lg-3">
+            <%=  %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-gl-3">
+            <p>請求金額</p>
+          </div>
+          <div class="col-lg-3">
+            <%= @o %>
+          </div>
+        </div>
       </div>
-
-      <!-- 商品数量 -->
-      <div class="row">
+    </div>
+    <div class="row ">
+      <div class="col-gl-2">
+        <h3>支払い方法</h3>
+      </div>
+      <div class="col-gl-4">
+        <%= @order.payment_method %>
+      </div>
+    </div>
+    <div class="col-gl-2">
+        <h3>お届け先</h3>
+      </div>
+      <div class="col-gl-4">
         <%=  %>
       </div>
-
-      <!-- 商品小計(個数*金額) -->
-      <div class="row">
-        <%= %>
-      </div>
-
-    <% end %>
+    </div>
   </div>
 </div>

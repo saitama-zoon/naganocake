@@ -74,7 +74,6 @@ class Customers::OrdersController < ApplicationController
     @order = Order.new
     #current_customerのcar中身を代入
     @cart_products = current_customer.cart_products
-    #@cart_products = Carts.find
 
     #:how_to_pay→new viewにて定義
     @order.payment_method = params[:order][:how_to_pay]
