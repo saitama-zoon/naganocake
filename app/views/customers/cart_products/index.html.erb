@@ -8,11 +8,11 @@
 	<% @cart_products.each do |item| %>
 	<tr>
 		<td><%= attachment_image_tag item.product, :image,style:"width:50px; height: 50px;",fallback: "no_image.png" %><%= item.product.name %></td>
-		<td><%= item.price_with_tax %></td>
+		<td><%= item.product.price %></td>
 		<td>
-			<%= form_for(item, url:cart_product_path) do |f| %>
-				<%= f.text.field :quantity %>
-				<%= submit '変更' %>
+			<%= form_for(item, url:cart_product_path(item)) do |f| %>
+				<%= f.text_field :quantity %>
+				<%= f.submit '変更' %>
 			<% end %>
 		</td>
 		<td>

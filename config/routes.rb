@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     # 退会処理アクション
     resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
     resources :products,only:[:index,:show]
-    resources :cart_products, only:[:index, :create, :update, :destroy]
+    resources :cart_products, only:[:index, :update, :destroy]
+    post "cart_product/:id" => "cart_products#create",as: "cart_products_create"
+    #creatアクションに商品idが必要になるためresourcesとは別で定義
     delete "cart_products" => "cart_products#destroy_all",as: "cart_products_destroy_all"
     resources :orders, only:[:new, :create, :index, :show]
     get "orders/confirm" => "orders#confirm",as: "confirm"

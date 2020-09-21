@@ -1,6 +1,6 @@
 class Customers::CartProductsController < ApplicationController
 	before_action :authenticate_customer!
-	before_action :setup_cart_product!, only: [:create]
+	#before_action :setup_cart_product!, only: [:create]
 
 	def index
 		@cart_products=current_customer.cart_products
@@ -10,14 +10,16 @@ class Customers::CartProductsController < ApplicationController
 	def create
 		# カートに追加ボタンで実行、すでに同種類の商品が入っている場合は数量を追加
 		product = Product.find(params[:id])
-		if @cart_product.blank?
-			@cart_product=CartProduct.new(cart_product_params)
+			@cart_product=CartProduct.new
 			@cart_product.customer_id = current_customer.id
 			@cart_product.product_id = product.id
-			@cart_product.price_with_tax = product.price*1.1
-		end
-
-		@cart_product.quantity += 1.to_i
+		#end
+		#if @cart_product.quantity = nil
+			total_quantity = 1
+		#else
+			#total_quantity = @cart_product.quantity + 1
+		#end
+		@cart_product.quantity =  total_quantity
 		@cart_product.save
 		redirect_to cart_products_path
 	end
@@ -52,7 +54,7 @@ class Customers::CartProductsController < ApplicationController
 	end
 
 	def setup_cart_product!
-    @cart_product = current_customer.cart_product.find_by(product_id: params[:id])
+    @cart_product = current_customer.cart_products.find_by(product_id: params[:id])
   	end
   	#カートに入れる際、カート内に同じ商品が入っている場合はその情報を所得
 
