@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     sessions: 'admins/sessions'
   }
 
+
   scope module: 'customers' do
     root 'homes#top'
     get 'home' => "homes#top",as: 'home'
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
     # 退会画面の表示
     patch "/withdeawal" => "customers#hide",as: "hide"
     # 退会処理アクション
+
     resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
     resources :products,only:[:index,:show]
     resources :cart_products, only:[:index, :create, :update, :destroy]
