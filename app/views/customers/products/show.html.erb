@@ -18,7 +18,7 @@
         <%= @product.introduction %>
         <p><strong>¥ <%= @product.price %></strong> (税込)</p>
         <%= select_tag options_for_select(1..10), { include_blank: "個数を選択してください" } %>
-        <%= link_to "カートに入れる" %>
+        <%= link_to "カートに入れる",cart_products_create_path(@product) ,method: :POST %>
     </div>
   </div>
 </div>
