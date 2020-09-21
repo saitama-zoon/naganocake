@@ -13,7 +13,7 @@ class Customers::DestinationsController < ApplicationController
     @destination.customer_id = current_customer.id
 
     if @destination.save
-      flash[:notice] = "You have created book successfully."
+      flash[:notice] = "You have created destination successfully."
       redirect_to destinations_path
     else
       @destinations = Destination.all
