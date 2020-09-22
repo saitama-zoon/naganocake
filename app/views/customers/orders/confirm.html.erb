@@ -3,44 +3,110 @@
     <div class="row">
       <h2>注文情報確認</h2>
     </div>
+
     <!-- HTMLとしてフォームを送信するには以下の記述らしい -->
     <%= form_with(model: @order, local: true) do |f| %>
 
-    <div class="">
-      <div class="row">
-        <div class=""><h4>商品名</h4></div>
-        <div class=""><h4>単価（税込）</h4></div>
-        <div class=""><h4>数量</h4></div>
-        <div class="2"><h4>小計</h4></div>
-      </div>
-    </div>
-
-    <!-- current_customerのcart内容を表示   -->
-    <!-- 購入金額用関数 sum_all view上で定義して使用...？ -->
-    <% sum_all = 0 %>
-    <% @cart_products.each do |cart_product| %>
-      <!-- 商品情報ページへのlink作成する？ -->
-
-      <!-- 商品画像 -->
-      <div class="row">
-        <%= attachment_image_tag(cart_product.product, :image, :fill, 100, 100, fallback:  "") %>
+      <div class="">
+        <div class="row">
+          <div class=""><h4>商品名</h4></div>
+          <div class=""><h4>単価（税込）</h4></div>
+          <div class=""><h4>数量</h4></div>
+          <div class=""><h4>小計</h4></div>
+        </div>
       </div>
 
-      <!-- 商品名 -->
+      <!-- current_customerのcart内容を表示   -->
+      <!-- 購入金額用関数 sum_all view上で定義して使用...？ -->
+      <% sum_all = 0 %>
+      <% @cart_products.each do |cart_product| %>
+        <!-- 商品情報ページへのlink作成する？ -->
+        <div class="row">
+          <!-- 商品画像 -->
+          <div class="row">
+            <%= attachment_image_tag(cart_product.product, :image, :fill, 100, 100, fallback:  "")  %>
+          </div>
+
+          <!-- 商品名 -->
+          <div class="row">
+            <%= cart_product.product.name %>
+          </div>
+
+          <!-- 単価（税込） -->
+          <div class="row">
+            <%= cart_product.product.price %>
+          </div>
+
+          <!-- 商品数量 -->
+          <div class="row">
+            <%= cart_product.quantity %>
+          </div>
+
+          <!-- 商品小計(個数*金額) -->
+          <div class="row">
+            <%= sum_product = cart_product.product.price * cart_product.quantity %>
+            <% sum_all += sum_product %>
+          </div>
+        </div>
+      <% end %>
       <div class="row">
-        <%= cart_product.product.name %>
+        <div class="">
+          <div class="row">
+            <div class="col-gl-3">
+              <p>送料</p>
+            </div>
+            <div class="col-lg-3">
+              <%= @order.shipping %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-gl-3">
+              <p>商品合計</p>
+            </div>
+            <div class="col-lg-3">
+              <%= sum_all.to_i %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-gl-3">
+              <p>請求金額</p>
+            </div>
+            <div class="col-lg-3">
+              <% billing_amount = sum_all + @order.shipping %>
+              <%= billing_amount.to_i %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-gl-2">
+          <strong>支払い方法</strong>
+        </div>
+        <div class="col-gl-4">
+          <%= @order.payment_method %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-gl-2">
+            <strong>お届け先</strong>
+        </div>
+        <div class="col-gl-4">
+          <%= @order.postal_code %><br>
+          <%= @order.address %><br>
+          <%= @order.name %><br>
+        </div>
       </div>
 
-      <!-- 商品数量 -->
-      <div class="row">
-        <%=  %>
-      </div>
+      <%= f.hidden_field :customer_id, :value => current_customer.id %>
+      <%= f.hidden_field :post_code, :value => "#{@order.postal_code}" %>
+      <%= f.hidden_field :send_to_address, :value => "#{@order.address}" %>
+      <%= f.hidden_field :name, :value => "#{@order.name}" %>
 
-      <!-- 商品小計(個数*金額) -->
       <div class="row">
-        <%= %>
+        <div class="col-lg-2">
+          <%= f.submit "購入を確定する", class: "btn btn-success btn-lg" %>
+        </div>
       </div>
-
     <% end %>
   </div>
 </div>
