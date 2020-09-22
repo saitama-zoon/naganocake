@@ -1,24 +1,25 @@
 <div class="row">
-  <%= form_with(model: @product, local: true) do |f| %>
-    <div col-md-2>
-      <h2>商品新規登録</h2>
-      <%= f.attachment_image_tag @product, :image, :fill, 40, 40, format: 'jpeg' %>
-    </div>
+  <div class="col-md-2">
+  <%= form_with(model: @product, url: admins_product_path(@product), local: true) do |f| %>
+      <h2>商品編集</h2>
+      <%= attachment_image_tag @product, :image, size: "300x200", format: 'jpeg', fallback: 'no_image.jpg' %>
+      <%= f.attachment_field :image %>
+  </div>
 
-    <div col-md-8>
+    <div class="col-md-8">
       <%= f.label :name, "商品名" %>
       <%= f.text_field :name %>
       <%= f.label :introduction, "商品説明" %>
       <%= f.text_field :introduction %>
       <%= f.label :name, "ジャンル" %>
-      <%= f.select :category_id, @category %>
+      <%= f.collection_select(:category_id, Category.all, :id, :name) %>
       <%= f.label :price, "税抜価格" %>
       <%= f.text_field :price %>
       <%= f.label :is_sale_status, "販売ステータス" %>
       <%= f.select :is_sale_status, ["販売中", "売切中"] %>
     </div>
 
-    <div col-md-2>
+    <div class="col-md-2">
      <%= f.submit "変更を保存" %>
     </div>
   <% end %>
