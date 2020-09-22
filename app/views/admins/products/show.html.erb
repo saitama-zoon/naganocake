@@ -2,7 +2,7 @@
   <%= form_with(model: @product, local: true) do |f| %>
     <div col-md-2>
       <h2>商品詳細</h2>
-      <%= f.attachment_image_tag @product, :image, :fill, 40, 40, format: 'jpeg' %>
+      <%= attachment_image_tag @product, :image, :fill, 40, 40, format: 'jpeg' %>
     </div>
 
     <div col-md-8>
@@ -12,7 +12,7 @@
         <%= f.label :introduction, "商品説明" %>
         <%= product.introduction %>
         <%= f.label :name, "ジャンル" %>
-        <%= category_id %>
+        <%= product.category_id %>
         <%= f.label :price, "税抜価格" %>
         <%= product.price %>
         <%= f.label :is_sale_status, "販売ステータス" %>

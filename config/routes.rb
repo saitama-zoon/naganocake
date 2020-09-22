@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   scope module: 'customers' do
     resource :customer, only:[:show, :edit, :update]
     get 'customer/withdrawl'=> "customers#withdrawl"
-    patch 'customer/withdrawl' => "customers#hide"    
-    resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
+    patch 'customer/withdrawl' => "customers#hide"
+    resources :destinations,only:[:index, :create, :edit, :update, :destroy]
     resources :products,only:[:index,:show]
     resources :cart_products, only:[:index, :update, :destroy]
     post "cart_product/:id" => "cart_products#create",as: "cart_products_create"
