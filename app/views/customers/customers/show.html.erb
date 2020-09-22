@@ -1,11 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-
-      <h3>マイページ</h3>
-      <h4>登録情報</h4>
-        <%= link_to '編集する', edit_customer_path, class: '' %>
-        <%= link_to 'パスワードを変更する', new_admin_password_path, class: '' %>
+    <div class="row">
+     <div class="col-sm-8 text-center" style=""><h4><mark> マイページ </mark></h4></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2" style=""><h4><strong> 登録情報 </strong></h4></div>
+        <div class="col-sm-1" style=""><%= link_to '  編集する  ', edit_customer_path, class: 'btn btn-danger' %></div>
+        <div class="col-sm-1" style=""><%= link_to '  パスワードを変更する  ', new_admin_password_path, class: 'btn btn-danger' %></div>
+    </div>
+    <div class="row">
+     <div class="col-sm-8 " style="">
         <table class="table">
           <tbody>
             <tr>
@@ -34,12 +38,20 @@
             </tr>
           </tbody>
         </table>
-
-      <h4>配送先</h4>
-      　　<%= link_to '一覧を見る', destinations_path , class: '' %>
-      <h4>注文履歴</h4>
-      	 <%= link_to '一覧を見る', "#", class: '' %>
-
+      </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-sm-8" style="">
+        <h4><strong>配送先</strong></h4>
+          <%= link_to '   一覧を見る   ', destinations_path , class: 'btn btn-danger' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2" style="">
+        <h4><strong>注文履歴</strong></h4>
+      </div>
+      <div class="col-sm-1" style="">
+        <%= link_to '   一覧を見る   ', "#", class: 'btn btn-danger' %>
+      </div>
+    </div>
 </div>
