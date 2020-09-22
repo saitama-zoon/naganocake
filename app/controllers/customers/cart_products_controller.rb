@@ -14,8 +14,12 @@ class Customers::CartProductsController < ApplicationController
 			@cart_product.customer_id = current_user.id
 			@cart_product.product_id = product.id
 		end
-
-		@cart_product.quantity += 1.to_i
+        if @cart_product.quantity == nil
+		   @cart_product.quantity = 1
+		else
+		  total_quantity = @cart_product.quantity + 1
+		  @cart_product.quantity =  total_quantity
+		end
 		@cart_product.save
 		redirect_to cart_products_path
 	end
