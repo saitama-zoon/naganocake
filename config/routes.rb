@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resource :customer, only:[:show, :edit, :update]
     get 'customer/withdrawl'=> "customers#withdrawl"
     patch 'customer/withdrawl' => "customers#hide"
-    resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
+
+    resources :destinations, only:[:index, :create, :show, :edit, :update, :destroy]
+
     resources :products,only:[:index,:show] do
     #ジャンル検索機能アクション
       get :search, on: :collection

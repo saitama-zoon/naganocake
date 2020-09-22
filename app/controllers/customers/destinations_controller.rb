@@ -6,8 +6,10 @@ class Customers::DestinationsController < ApplicationController
   end
 
   def index
+    @destination_customer = current_customer
   	@destination = Destination.new
-    @destinations = Destination.all
+    @customer = current_customer
+    @destinations = @customer.destinations
   end
 
   def create
@@ -15,7 +17,7 @@ class Customers::DestinationsController < ApplicationController
     @destination.customer_id = current_customer.id
 
     if @destination.save
-      flash[:notice] = "You have created book successfully."
+      flash[:notice] = "You have created destination successfully."
       redirect_to destinations_path
     else
       @destinations = Destination.all
@@ -24,6 +26,7 @@ class Customers::DestinationsController < ApplicationController
   end
 
   def edit
+    @destination_customer = current_customer
   	@destination = Destination.find(params[:id])
   end
 
