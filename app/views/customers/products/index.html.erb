@@ -1,32 +1,36 @@
-<div class="row">
-  <div class="col-lg-4">
-    <table>
-      <thead>
-        <tr>
-          <th>ジャンル検索</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @categories.each do |category| %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= link_to category.name, search_products_path(category.id), method: :get %></td>
+            <th>ジャンル検索</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
 
-  <div class="col-lg-8">
-    <h2>商品一覧</h2><%= "全#{@products.count}件" %>
-      <% @products.each do |product| %>
-        <div class="box">
-          <%= link_to product_path(product.id) do %>
-            <%= attachment_image_tag @product, :image, :fill, 100, 80, format: 'jpeg', fallback: 'no_image.png' %>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <td><%= link_to category.name, search_products_path(category), method: :get %></td>
+            </tr>
           <% end %>
-　　　　     <p>商品名<%= product.name %></p>
-　　　　     <p>¥<%= product.price %></p>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-lg-8">
+      <h2>
+        <strong>商品一覧</strong><span style="font-size: 20px;"> (全<%= @products.count %>件)</span>
+      </h2>
+      <% @products.each do |product| %>
+        <div class="box" style="float:left; margin-right:0px;">
+          <%= link_to product_path(product.id) do %>
+            <%= attachment_image_tag @product, :image, size: "200x100", format: 'jpeg', fallback: 'no_image.png' %>
+          <% end %>
+　　　　   <p><strong><%= product.name %></strong></p>
+　　　　   <p><strong>¥<%= product.price %></strong></p>
         </div>
       <% end %>
+    </div>
   </div>
 </div>
