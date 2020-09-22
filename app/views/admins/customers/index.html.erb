@@ -11,12 +11,12 @@
 				<tr>
 					<td><%= customer.id %></td>
 					<td><%= link_to admins_customer_path(customer) do %>
-							<%= customer.first_name + customer.last_name %>
+							<%= customer.first_name %><%= customer.last_name %>
 						<% end %>
 					</td>
 					<!-- 名前をクリックして会員詳細に遷移（リンク先未実装） -->
 					<td><%= customer.email %></td>
-					<td><% if customer.is_member == true %>
+					<td><% if customer.is_member == "Available" %>
 							有効
 						<% else %>
 							無効

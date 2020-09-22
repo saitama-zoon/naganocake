@@ -1,11 +1,15 @@
 class Customers::DestinationsController < ApplicationController
+  before_action :authenticate_customer!
+
   def show
   	@destination = Destination.find(params[:id])
   end
 
   def index
+    @destination_customer = current_customer
   	@destination = Destination.new
-    @destinations = Destination.all
+    @customer = current_customer
+    @destinations = @customer.destinations
   end
 
   def create
@@ -22,6 +26,7 @@ class Customers::DestinationsController < ApplicationController
   end
 
   def edit
+    @destination_customer = current_customer
   	@destination = Destination.find(params[:id])
   end
 
@@ -45,4 +50,5 @@ private
   def destination_params
 	  params.require(:destination).permit(:postal_code, :address, :name, :customer_id)
   end
+
 end

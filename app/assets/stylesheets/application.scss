@@ -14,11 +14,14 @@
  *= require_self
  */
 
-* {
-    background-color: #FFFAF0;
-}
+
 body{
 	padding-top: 60px;
+}
+
+header{
+	height: 50px;
+
 }
 
  @import "bootstrap-sprockets";
