@@ -10,15 +10,13 @@ Rails.application.routes.draw do
   get 'homes/about' => "customers/homes#about",as: 'about'
 
   scope module: 'customers' do
-    resource :customer, only:[:show, :edit, :update]
+    resource :'customers', only:[:show, :edit, :update]
     get 'customer/withdrawl'=> "customers#withdrawl"
     patch 'customer/withdrawl' => "customers#hide"
-
     resources :destinations, only:[:index, :create, :show, :edit, :update, :destroy]
-
     resources :products,only:[:index,:show] do
     #ジャンル検索機能アクション
-      get :search, on: :collection
+     get 'search/:id' => "products#search", as: 'search_products'
     end
 
     resources :cart_products, only:[:index, :update, :destroy]
@@ -30,7 +28,6 @@ Rails.application.routes.draw do
     post "orders/confirm" => "orders#confirm",as: "confirm"
     get "orders/thank" => "orders#thank",as: "thank"
     #post "orders/session" => "orders#session",as: "session
-  end
 
   devise_for :admins, controllers: {
           sessions: 'admins/sessions'

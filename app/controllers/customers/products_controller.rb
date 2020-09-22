@@ -9,12 +9,14 @@ class Customers::ProductsController < ApplicationController
   	@product = Product.find(params[:id])
   	@cart_product = CartProduct.new
   	@categories = Category.all
+    @tax = @product.price * 1.1
   end
   #ジャンル検索機能
   def search
-  	@products = Product.where(category_id: params[:fotmat])
-    @quantity = Product.where(category_id: params[:fotmat]).count
-    @categories = Category.where(is_sale_status: true)
+  	@products = Product.where(category_id: params[:id])
+    @quantity = Product.where(category_id: params[:id]).count
+    @categories = Category.where(is_effective: "true" )
+    #binding.pry
     render 'index'
   end
 

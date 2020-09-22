@@ -1,25 +1,28 @@
-<div class="row">
-  <%= form_with(model: @product, url: '/admins/products', local: true) do |f| %>
-    <div col-md-2>
-      <h2>商品新規登録</h2>
-      <%= f.attachment_field :image %>
-    </div>
+<div class="container">
+  <div class="row">
+    <%= form_with(model: @product, url: '/admins/products', local: true) do |f| %>
+      <div class="col-lg-3">
+        <h2>商品新規登録</h2>
+        <%= attachment_image_tag @product, :image, size: "300x200", format: 'jpeg' %>
+        <%= f.attachment_field :image %>
+      </div>
 
-    <div col-md-8>
-      <%= f.label :name, "商品名" %>
-      <%= f.text_field :name %>
-      <%= f.label :introduction, "商品説明" %>
-      <%= f.text_field :introduction %>
-      <%= f.label :name, "ジャンル" %>
-      <%= f.collection_select(:category_id, @categories, :id, :name) %>
-      <%= f.label :price, "税抜価格" %>
-      <%= f.text_field :price %>
-      <%= f.label :is_sale_status, "販売ステータス" %>
-      <%= f.select :is_sale_status, ["販売中", "売切中"] %>
-    </div>
+      <div class="col-lg-7">
+        <%= f.label :name, "商品名" %>
+        <%= f.text_field :name %><br>
+        <%= f.label :introduction, "商品説明" %>
+        <%= f.text_field :introduction %><br>
+        <%= f.label :name, "ジャンル" %>
+        <%= f.collection_select(:category_id, @categories, :id, :name, include_blank: "-- 選択してください --") %><br>
+        <%= f.label :price, "税抜価格" %>
+        <%= f.text_field :price %><br>
+        <%= f.label :is_sale_status, "販売ステータス" %>
+        <%= f.select :is_sale_status, ["販売中", "売切中"], include_blank: "-- 選択してください --" %>
+      </div>
 
-    <div col-md-2>
-     <%= f.submit "新規登録" %>
-    </div>
-  <% end %>
+      <div class="col-lg-2">
+       <%= f.submit "新規登録", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 </div>
