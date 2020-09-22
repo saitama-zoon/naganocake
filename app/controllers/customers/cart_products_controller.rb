@@ -4,7 +4,6 @@ class Customers::CartProductsController < ApplicationController
 
 	def index
 		@cart_product=current_customer.cart_product.all
-		@total_price= @cart_products.sum(:price_with_tax)*1.1
 	end
 
 	def create
@@ -14,7 +13,6 @@ class Customers::CartProductsController < ApplicationController
 			@cart_product=CartProduct.new
 			@cart_product.customer_id = current_user.id
 			@cart_product.product_id = product.id
-			@cart_product.price_with_tax = product.price*1.1
 		end
 
 		@cart_product.quantity += 1.to_i

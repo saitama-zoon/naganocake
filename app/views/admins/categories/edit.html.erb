@@ -1,16 +1,18 @@
-<div class="row">
-  <div class="col-md-2">
-    <h2>ジャンル編集</h2>
-      <%= form_with(model: @category, url: admins_category_path(@category), local: true) do |f| %>
-        <div class="form">
-          <%= f.label :name, "ジャンル" %>
-          <%= f.text_field :name %>
-          <%= f.radio_button :is_effective, :true %>
-          <%= f.label :is_effective, "有効", {value: true} %>
-　　　　　　<%= f.radio_button :is_effective, :false %>
-          <%= f.label :is_effective, "無効", {value: false} %>
-          <%= f.submit "変更を保存する" %>
-        </div>
-      <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h2>ジャンル編集</h2>
+        <%= form_with(model: @category, url: admins_category_path(@category), local: true) do |f| %>
+          <div class="form">
+            <%= f.label :name, "ジャンル" %>
+            <%= f.text_field :name %>
+            <%= f.radio_button :is_effective, :true %>
+            <%= f.label :is_effective, "有効", {value: true} %>
+            <%= f.radio_button :is_effective, :false %>
+            <%= f.label :is_effective, "無効", {value: false} %>
+            <%= f.submit "変更を保存する", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+    </div>
   </div>
 </div>

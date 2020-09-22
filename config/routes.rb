@@ -20,17 +20,17 @@ Rails.application.routes.draw do
     patch "/withdeawal" => "customers#hide",as: "hide"
     # 退会処理アクション
     resources :'destinatons' ,only: [:index, :create, :edit, :update, :destroy]
-    resources :'products', only: [:index,:show] do
+    resources :'products', only: [:index,:show]
       #ジャンル検索機能アクション
-      get :search, on: :collection
-    end
+      get 'search/:id' => "products#search", as: 'search_products'
+  end
 
     resources :'cart_products', only:[:index, :create, :update, :destroy]
+    post "cart_product/:id" => "cart_products#create",as: "cart_products_create"
     resources :'orders', only:[:new, :create, :index, :show]
     post "orders/confirm" => "orders#confirm",as: "confirm"
     get "orders/thank" => "orders#thank",as: "thank"
     #post "orders/session" => "orders#session",as: "session
-  end
 
   devise_scope :customers do
     delete 'customers/sign_out' => 'customers/sessions#destroy', as: 'destroy_customers_session'
