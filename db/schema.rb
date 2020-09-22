@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_012727) do
+ActiveRecord::Schema.define(version: 2020_09_21_055722) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_09_21_012727) do
     t.string "postal_code"
     t.text "address"
     t.string "phone_number"
-    t.boolean "is_member", default: true
+    t.boolean "is_member", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_customers_on_email", unique: true

@@ -1,24 +1,30 @@
 <div class="row">
   <div class="col-lg-4">
-    <div class="category-section">
-      <h2>ジャンル検索</h2>
-        <div class="category-list">
-          <p><%= link_to 'ケーキ' %></p>
-          <p><%= link_to '焼き菓子' %></p>
-          <p><%= link_to 'プリン' %></p>
-          <p><%= link_to 'キャンディ' %></p>
-        </div>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ジャンル検索</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= link_to category.name, search_products_path(category.id), method: :get %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 
   <div class="col-lg-8">
-    <div class="box">
-        <%= attachment_image_tag @product, :image, :fill, 300, 200, format: 'jpeg', fallback: 'no_image.png' %>
+        <%= attachment_image_tag @product, :image, :fill, 400, 300, format: 'jpeg', fallback: 'no_image.png' %>
         <strong><%= @product.name %></strong>
         <%= @product.introduction %>
         <p><strong>¥ <%= @product.price %></strong> (税込)</p>
-        <%= select_tag options_for_select(1..10), { include_blank: "個数を選択してください" } %>
+        <%= form_for @cart_product do |f| %>
+          <%= f.select :quantity, options_for_select(1..10), include_blank: "個数を選択してください" %>
+        <% end %>
         <%= link_to "カートに入れる",cart_products_create_path(@product) ,method: :POST %>
-    </div>
   </div>
 </div>
