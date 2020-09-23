@@ -16,7 +16,7 @@
 					</td>
 					<!-- 名前をクリックして会員詳細に遷移（リンク先未実装） -->
 					<td><%= customer.email %></td>
-					<td><% if customer.is_member == false %>
+					<td><% if customer.is_member == "Available" %>
 							有効
 						<% else %>
 							無効
