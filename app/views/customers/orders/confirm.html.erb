@@ -88,6 +88,8 @@
         <%= @order.name %><br>
       </div>
     </div>
+    <!-- 支払い方法もcreate actionにわたっていない模様 -->
+    <%= f.hidden_field :how_to_pay, :value => "#{@order.payment_method}" %>
     <%= f.hidden_field :add, :value => "#{@add}" %>
     <%= f.hidden_field :customer_id, :value => current_customer.id %>
     <%= f.hidden_field :post_code, :value => "#{@order.postal_code}" %>

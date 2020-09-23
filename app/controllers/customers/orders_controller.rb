@@ -13,8 +13,10 @@ class Customers::OrdersController < ApplicationController
     if current_customer.cart_products.exists?
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
+      @order.payment_method = params[:order][:how_to_pay]
       @add = params[:order][:add].to_i
       #送り先情報をorderへ保存
+      #binding.pry
       case @add
         when 1
           @order.postal_code = @customer.post_code
@@ -30,7 +32,6 @@ class Customers::OrdersController < ApplicationController
           @order.name = params[:order][:name]
       end
       @order.save
-  binding.pry
       #dstnationモデル検索、未登録時case分岐の値を新規登録
       #→post_code,addressがnillになってる模様
       if Destination.find_by(address: @order.address).nil?
@@ -60,14 +61,19 @@ class Customers::OrdersController < ApplicationController
   end
 
   def index
-    #@orders = @customer.orders
+    @orders = @customer.orders
   end
 
   def show
-    #@order = Order.find[params[:id]]
+    @order = Order.find(params[:id])
+    #binding.pry
+    if @order.customer_id != current_customer.id
+      redirect_back(fallback_location: root_path)
+      flash[:alert] = ""
+    end
   end
 
-  #?
+  #binding.pry
   def update
   end
 
@@ -104,7 +110,6 @@ class Customers::OrdersController < ApplicationController
         @order.address = params[:order][:new_add][:address]
         @order.name = params[:order][:new_add][:name]
     end
-    #binding.pry
   end
 
   #session actionは使用せずに処理可能かも?
@@ -122,6 +127,6 @@ class Customers::OrdersController < ApplicationController
 
   #order_productsとの紐付け必要...
   def order_params
-    params.require(:order).permit(:create_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status)
+    params.require(:order).permit(:created_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status)
   end
 end
