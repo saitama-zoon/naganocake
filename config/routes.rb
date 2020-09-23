@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resource :'customers', only:[:show, :edit, :update]
     get 'customer/withdrawl'=> "customers#withdrawl"
     patch 'customer/withdrawl' => "customers#hide"
+
     resources :destinations, only:[:index, :create, :show, :edit, :update, :destroy]
+
     resources :products,only:[:index,:show] do
     #ジャンル検索機能アクション
      get 'search/:id' => "products#search", as: 'search_products'
@@ -26,8 +28,9 @@ Rails.application.routes.draw do
     resources :'cart_products', only:[:index, :create, :update, :destroy]
     resources :'orders', only:[:new, :create, :index, :show]
     post "orders/confirm" => "orders#confirm",as: "confirm"
-    get "orders/thank" => "orders#thank",as: "thank"
-    #post "orders/session" => "orders#session",as: "session
+    get "orders/thank" => "orders#thank",as: "thank"    
+  end
+
 
   devise_for :admins, controllers: {
           sessions: 'admins/sessions'

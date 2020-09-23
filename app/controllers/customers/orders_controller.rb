@@ -17,35 +17,30 @@ class Customers::OrdersController < ApplicationController
       #送り先情報をorderへ保存
       case @add
         when 1
-          @order.post_code = @customer.post_code
+          @order.postal_code = @customer.post_code
           @order.address = @customer.address
           @order.name = @customer.first_name + @customer.last_name
         when 2
-          @order.post_code = params[:order][:post_code]
+          @order.postal_code = params[:order][:post_code]
           @order.address = params[:order][:send_to_address]
           @order.name = params[:order][:name]
         when 3
-          @order.post_code = params[:order][:post_code]
+          @order.postal_code = params[:order][:post_code]
           @order.address = params[:order][:send_to_address]
           @order.name = params[:order][:name]
-          #@order.post_code = params[:order][:postal_code]
-          #@order.address = params[:order][:address]
-          #@order.name = params[:order][:name]
       end
       @order.save
-  #binding.pry
+  binding.pry
       #dstnationモデル検索、未登録時case分岐の値を新規登録
       #→post_code,addressがnillになってる模様
-      #if Destination.find_by(address: @order.address).nil?
+      if Destination.find_by(address: @order.address).nil?
         @destination = Destination.new
         @destination.postal_code = @order.postal_code
         @destination.address = @order.address
         @destination.name = @order.name
         @destination.customer_id = current_customer.id
         @destination.save
-      #end
-
-  #binding.pry
+      end
 
       current_customer.cart_products.each do |cart_puroduct|
         order_product = @order.order_products.new
@@ -98,7 +93,6 @@ class Customers::OrdersController < ApplicationController
         #new view プルダウン部で定義したselect_to_addressより値を取得
         #登録済み住所の情報取得メソッド...要動作確認
         @sta = params[:order][:send_to_address].to_i
-        binding.pry
         @send_to_address = Destination.find(@sta)
         @order.postal_code = @send_to_address.postal_code
         @order.address = @send_to_address.address
@@ -110,6 +104,7 @@ class Customers::OrdersController < ApplicationController
         @order.address = params[:order][:new_add][:address]
         @order.name = params[:order][:new_add][:name]
     end
+    #binding.pry
   end
 
   #session actionは使用せずに処理可能かも?
