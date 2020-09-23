@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'homes/about' => "customers/homes#about",as: 'about'
 
   scope module: 'customers' do
-    resource :'customers', only:[:show, :edit, :update]
+    resource :customer, only:[:show, :edit, :update]
     get 'customer/withdrawl'=> "customers#withdrawl"
     patch 'customer/withdrawl' => "customers#hide"
     resources :destinatons,only:[:index, :create, :edit, :update, :destroy]
