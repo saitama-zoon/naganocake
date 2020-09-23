@@ -37,7 +37,9 @@
           ご自身の住所
         </label><br>
         <!-- customers(current_customer) テーブルより出力 -->
-
+        <%= @customer.postal_code %>
+        <%= @customer.address %><br>
+        <%= @customer.first_name + @customer.last_name %>
       </p>
     </div>
     <!-- 登録済み住所 -->
@@ -47,8 +49,8 @@
           <%= f.radio_button :add, 2, style: "" %>登録住所から選択
         </label><br>
         <!-- プルダウン機能 :send_to_address→confirm actionへparamを渡す -->
-        <!-- ### 要動作確認 ### -->
-        <%= f.collection_select :send_to_address, @customer.destinations, :id, :address %>
+        <!-- :select_destはorder.rbでカラムを結合したメソッド -->
+        <%= f.collection_select :send_to_address, @customer.destinations, :id, :full_dest %>
       </p>
     </div>
     <!-- 新しい配送先 -->

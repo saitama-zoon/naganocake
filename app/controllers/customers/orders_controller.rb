@@ -5,8 +5,6 @@ class Customers::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    #これだと全部取得してしまう
-    #@customer_address = Destination.all
   end
 
   def create
@@ -16,7 +14,6 @@ class Customers::OrdersController < ApplicationController
       @order.payment_method = params[:order][:how_to_pay]
       @add = params[:order][:add].to_i
       #送り先情報をorderへ保存
-      #binding.pry
       case @add
         when 1
           @order.postal_code = @customer.post_code
@@ -66,7 +63,6 @@ class Customers::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    #binding.pry
     if @order.customer_id != current_customer.id
       redirect_back(fallback_location: root_path)
       flash[:alert] = ""
@@ -111,8 +107,6 @@ class Customers::OrdersController < ApplicationController
         @order.name = params[:order][:new_add][:name]
     end
   end
-
-  #session actionは使用せずに処理可能かも?
 
 
   #注文完了画面を表示するのみ
