@@ -6,22 +6,22 @@
     </div>
 
     <div col-md-8>
-      <% @products.each do |product| %>
-        <%= f.label :name, "商品名" %>
-        <%= product.name %>
-        <%= f.label :introduction, "商品説明" %>
-        <%= product.introduction %>
-        <%= f.label :name, "ジャンル" %>
-        <%= product.category_id %>
-        <%= f.label :price, "税抜価格" %>
-        <%= product.price %>
-        <%= f.label :is_sale_status, "販売ステータス" %>
-        <%= product.is_sale_status %>
-      <% end %>
+
+      <%= f.label :name, "商品名" %>
+      <%= @product.name %>
+      <%= f.label :introduction, "商品説明" %>
+      <%= @product.introduction %>
+      <%= f.label :name, "ジャンル" %>
+      <%= @product.category.name %>
+      <%= f.label :price, "税抜価格" %>
+      <%= @product.price %>
+      <%= f.label :is_sale_status, "販売ステータス" %>
+      <%= @product.is_sale_status %>
+
     </div>
 
     <div col-md-2>
-     <%= f.submit "編集する" %>
+     <%= link_to "編集する", edit_admins_product_path(@product.id) %>
     </div>
   <% end %>
 </div>
