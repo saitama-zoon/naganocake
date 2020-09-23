@@ -24,9 +24,9 @@ Rails.application.routes.draw do
     resources :'cart_products', only:[:index, :create, :update, :destroy]
     resources :'orders', only:[:new, :create, :index, :show]
     post "orders/confirm" => "orders#confirm",as: "confirm"
-    get "orders/thank" => "orders#thank",as: "thank"
-    #post "orders/session" => "orders#session",as: "session
+    get "orders/thank" => "orders#thank",as: "thank"    
   end
+
   devise_for :admins, controllers: {
           sessions: 'admins/sessions'
   }
