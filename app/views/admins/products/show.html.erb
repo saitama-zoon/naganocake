@@ -1,25 +1,34 @@
 <div class="container">
   <div class="row">
     <%= form_with(model: @product, local: true) do |f| %>
-      <div class="col-lg-5">
-        <h2>商品詳細</h2>
-          <%= attachment_image_tag @product, :image, size: "300x200", format: 'jpeg' %>
+      <div class="col-lg-12">
+        <h2 style="font-size: 25px; padding-bottom: 10px;"><span style="background-color:#f8f8f8">　商品詳細　</span></h2>
       </div>
-
-      <div class="col-lg-5" >
-        <%= f.label :name, "商品名" %>
-        <%= @product.name %><br>
-        <%= f.label :introduction, "商品説明" %>
-        <%= @product.introduction %><br>
-        <%= f.label :name, "ジャンル" %>
-        <%= @product.category.name %><br>
-        <%= f.label :price, "税込価格(税抜価格)" %>
-        <%= @tax.to_i %> (<%= @product.price %>) 円<br>
-        <%= f.label :is_sale_status, "販売ステータス" %>
-        <%= @product.is_sale_status ? '販売中' : '売切中' %>
-      </div>
-
-      <div class="col-lg-2">
+        <div class="row o-3column">
+          <div class="col-lg-3" >
+            <%= attachment_image_tag @product, :image, size: "300x200", format: 'jpeg' %>
+          </div>
+          <div class="col-lg-9" >
+            <%= f.label :name, "商品名" %>
+              <span style="font-size: 18px; padding-left: 10px;">
+            <%= @product.name %><br>
+              </span>
+            <%= f.label :introduction, "商品説明" %>
+              <span style="font-size: 18px; padding-left: 10px;">
+            <%= @product.introduction %><br>
+              </span>
+            <%= f.label :name, "ジャンル" %>
+              <span style="font-size: 18px; padding-left: 10px;">
+            <%= @product.category.name %><br>
+              </span>
+            <%= f.label :price, "税込価格(税抜価格)" %>
+              <span style="font-size: 18px; padding-left: 10px;">
+            <%= @tax.to_i %> (<%= @product.price %>)</span> 円<br>
+            <%= f.label :is_sale_status, "販売ステータス" %>
+            <%= @product.is_sale_status ? '販売中' : '売切中' %>
+          </div>
+        </div>
+      <div class="col-lg-2 col-lg-offset-10">
         <%= link_to "編集する", edit_admins_product_path(@product.id), class: "btn btn-primary" %>
       </div>
     <% end %>
