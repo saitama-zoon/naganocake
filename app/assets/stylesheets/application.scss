@@ -14,14 +14,30 @@
  *= require_self
  */
 
-
-body{
-	padding-top: 60px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-header{
-	height: 50px;
+body {
+  padding-top: 150px;
+}
 
+header {
+  height: 100px;
+}
+
+.logo {
+  padding-top: 25px;
+}
+
+ul {
+  padding-top: 25px;
+}
+
+footer {
+  height: 100px;
 }
 
  @import "bootstrap-sprockets";

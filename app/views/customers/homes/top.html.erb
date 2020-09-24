@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-2">
       <table class="table">
         <thead>
           <tr>
@@ -11,30 +11,30 @@
         <tbody>
           <% @categories.each do |category| %>
             <tr>
-              <td><%= link_to category.name, cart_products_path(category), method: :get %></td>
+              <td><%= link_to category.name, search_products_path(category), method: :get %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
 
-    <div class="col-lg-8">
+    <div class="col-lg-10">
       <div class="main-visual">
-        <p class="main-visual-text">
-        ようこそ、NaganoCakeへ！<br>
-        このサイトは、ケーキ販売のECサイトになります。<br>
-        会員でない方も商品の閲覧はできますが、<br>
-        購入には会員登録が必要になります。
-        </p>
+        <div class="main-visual-text">
+          ようこそ、NaganoCakeへ！<br>
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、<br>
+          購入には会員登録が必要になります。
+        </div>
       </div>
-    <br>
-      <h2>
+      <br>
+      <h2 style="font-size: 25px;">
         <strong>オススメ商品</strong>
       </h2>
       <% @products.each do |product| %>
         <div class="box" style="float:left; margin-right:0px;">
           <%= link_to product_path(product.id) do %>
-            <%= attachment_image_tag @product, :image, size: "120x100", format: 'jpeg', fallback: 'no_image.png' %>
+            <%= attachment_image_tag @product, :image, size: "150x100", format: 'jpeg', fallback: 'no_image.png' %>
           <% end %>
 　　　　   <p><strong><%= product.name %></strong></p>
 　　　　   <p><strong>¥<%= product.price %></strong></p>

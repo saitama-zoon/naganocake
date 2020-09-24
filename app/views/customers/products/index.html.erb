@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-lg-2">
       <table class="table">
@@ -23,7 +23,7 @@
         <strong>商品一覧</strong><span style="font-size: 20px;"> (全<%= @products.count %>件)</span>
       </h2>
       <% @products.each do |product| %>
-        <div class="box" style="float:left; margin-right:0px;">
+        <div class="box" style="float: left; margin-right: 0px; padding-top: 50px;">
           <%= link_to product_path(product.id) do %>
             <%= attachment_image_tag @product, :image, size: "200x100", format: 'jpeg', fallback: 'no_image.png' %>
           <% end %>
@@ -31,6 +31,7 @@
 　　　　   <p><strong>¥<%= product.price %></strong></p>
         </div>
       <% end %>
+      <%= paginate @products %>
     </div>
   </div>
 </div>
