@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <h2>注文履歴一覧</h2>
+    <div class="co-lg-12">
+      <table class="table" >
+        <thead class="">
+          <tr>
+            <!-- 表示テスト用記述 -->
+            <th>注文ID</th>
+            <!-- /表示テスト用記述 -->
+            <th>購入日時</th>
+            <th>購入者</th>
+            <th>注文個数</th>
+            <th>ステータス</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td>
+                <%= order.id %>
+              </td>
+              <td><%= order.created_at.strftime('%Y/%m/%d %h:%m') %></td>
+              <td>
+                <!-- 詳細へリンク -->
+                <%= link_to order.name, admins_order_path(order) %>
+              </td>
+              <td>
+                <% quantity_all = 0 %>
+                <% order.order_products.each do |order_product| %>
+                  <% quantity_all += order_product.quantity %>
+                <% end %>
+                <%= quantity_all %>
+              </td>
+              <!-- enum日本語化 -->
+              <td><%= order.order_status_i18n %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

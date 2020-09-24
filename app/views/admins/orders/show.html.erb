@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <h2>注文履歴詳細</h2>
+    <%= form_with(model: @order, local: true) do |f| %>
+      <div class="co-lg-8">
+        <table class="table" style="border:none;">
+          <tbody>
+            <tr>
+              <td>購入者</td>
+              <td><%= @order.name %></td>
+            </tr>
+            <tr>
+              <td>配送先</td>
+              <td><%= @order.address %></td>
+            </tr>
+            <tr>
+              <td>支払方法</td>
+              <td><%= @order.payment_method_i18n %></td>
+            </tr>
+            <tr>
+              <td>注文ステータス</td>
+              <td>
+                <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]}  %>
+                <%= f.submit '更新', class: 'btn btn-primary' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="co-lg-9">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>単価(税込)</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th>制作ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @order.order_products.each do |order_product| %>
+              <tr>
+                <td><%= product = Product.find(order_product.product_id).name %></td>
+                <td><%= order_product.price_with_tax %></td>
+                <td><%= order_product.quantity %></td>
+                <td><%= order_product.price_with_tax * order_product.quantity %></td>
+                <td>
+                  <%= f.fields_for :order_product do |i| %>
+                  <%= order_product.product_status_i18n %>
+                  
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>
