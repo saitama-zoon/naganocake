@@ -1,28 +1,30 @@
-<div class="row">
-  <div col-md-3>
-    <h2>商品一覧</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @products.each do |product| %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-14">
+      <h2>商品一覧</h2>
+        <table class="table">
+          <thead>
             <tr>
-          	  <td><%= product.id %></td>
-          	  <td><%= link_to product.name, admins_product_path(product.id) %></td>
-          	  <td><%= product.price %></td>
-          	  <td><%= product.category.name %></td>
-          	  <td><%= product.is_sale_status %></td>
+              <th>商品ID</th>
+              <th>商品名</th>
+              <th>税抜価格</th>
+              <th>ジャンル</th>
+              <th>ステータス</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            <% @products.each do |product| %>
+              <tr>
+          	   <td><%= product.id %></td>
+          	   <td><%= link_to product.name, admins_product_path(product.id) %></td>
+          	   <td><%= product.price %></td>
+          	   <td><%= product.category.name %></td>
+          	   <td><%= product.is_sale_status ? '販売中' : '売切中' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
   </div>
 </div>
