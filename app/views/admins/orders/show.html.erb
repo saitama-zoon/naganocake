@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2>注文履歴詳細</h2>
-    <%= form_with(model: @order, local: true) do |f| %>
+    <%= form_for(@order, url:admins_order_path(@order), method: :patch) do |f| %>
       <div class="co-lg-8">
         <table class="table" style="border:none;">
           <tbody>
@@ -46,9 +46,9 @@
                 <td><%= order_product.quantity %></td>
                 <td><%= order_product.price_with_tax * order_product.quantity %></td>
                 <td>
-                  <%= f.fields_for :order_product do |i| %>
-                  <%= order_product.product_status_i18n %>
-                  
+                  <%= f.fields_for :order_products do |i| %>
+                    <%= i.select :product_status, OrderProduct.product_statuses.keys.map {|l| [I18n.t("enums.order_product.product_status.#{l}"), l]}  %>
+                    <%= f.submit '更新', class: 'btn btn-primary' %>
                   <% end %>
                 </td>
               </tr>

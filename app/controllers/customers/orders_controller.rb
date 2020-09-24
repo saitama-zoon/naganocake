@@ -121,7 +121,7 @@ class Customers::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(
       :created_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status,
-      order_products_attributes: [:product_id, :order_id, :quantity, :price_with_tax, :product_status]
+      order_products_attributes: [:id, :product_id, :order_id, :quantity, :price_with_tax, :product_status]
       )
   end
 end
