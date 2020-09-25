@@ -1,111 +1,83 @@
-<div class="container ">
+<div class="container">
   <div class="row">
-    <div class="row">
-      <h2>注文情報確認</h2>
-    </div>
-
-    <!-- HTMLとしてフォームを送信するには以下の記述らしい -->
+    <h2>注文情報確認</h2>
     <%= form_with(model: @order, local: true) do |f| %>
-
+      <div class="co-lg-9">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>単価(税込)</th>
+              <th>数量</th>
+              <th>小計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% sum_all = 0 %>
+            <% @cart_products.each do |cart_product| %>
+              <tr>
+                <td>
+                  <!-- 商品画像・商品名 -->
+                  <%= attachment_image_tag(cart_product.product, :image, :fill, 100, 100, fallback:  "") %>
+                  <%= cart_product.product.name %>
+                </td>
+                <td>
+                  <!-- 単価（税込） -->
+                  <%= cart_product.product.price %>
+                </td>
+                <td>
+                  <!-- 商品数量 -->
+                  <%= cart_product.quantity %>
+                </td>
+                <td>
+                  <!-- 商品小計(個数*金額) -->
+                  <%= sum_product = cart_product.product.price * cart_product.quantity %>
+                  <% sum_all += sum_product %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="co-lg-3">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>送料</td>
+              <td><%= @order.shipping %></td>
+            </tr>
+            <tr>
+              <td>商品合計</td>
+              <td><%= sum_all.to_i %></td>
+            </tr>
+            <tr>
+              <td>ご請求金額</td>
+              <td>
+                <% billing_amount = sum_all + @order.shipping %>
+                <%= billing_amount.to_i %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="">
-        <div class="row">
-          <div class=""><h4>商品名</h4></div>
-          <div class=""><h4>単価（税込）</h4></div>
-          <div class=""><h4>数量</h4></div>
-          <div class=""><h4>小計</h4></div>
-        </div>
+        <strong>支払い方法</strong>
+        <%= @order.payment_method_i18n %>
       </div>
-
-      <!-- current_customerのcart内容を表示   -->
-      <!-- 購入金額用関数 sum_all view上で定義して使用...？ -->
-      <% sum_all = 0 %>
-      <% @cart_products.each do |cart_product| %>
-        <!-- 商品情報ページへのlink作成する？ -->
-        <div class="row">
-          <!-- 商品画像 -->
-          <div class="row">
-            <%= attachment_image_tag(cart_product.product, :image, :fill, 100, 100, fallback:  "")  %>
-          </div>
-
-          <!-- 商品名 -->
-          <div class="row">
-            <%= cart_product.product.name %>
-          </div>
-
-          <!-- 単価（税込） -->
-          <div class="row">
-            <%= cart_product.product.price %>
-          </div>
-
-          <!-- 商品数量 -->
-          <div class="row">
-            <%= cart_product.quantity %>
-          </div>
-
-          <!-- 商品小計(個数*金額) -->
-          <div class="row">
-            <%= sum_product = cart_product.product.price * cart_product.quantity %>
-            <% sum_all += sum_product %>
-          </div>
-        </div>
-      <% end %>
-      <div class="row">
-        <div class="">
-          <div class="row">
-            <div class="col-gl-3">
-              <p>送料</p>
-            </div>
-            <div class="col-lg-3">
-              <%= @order.shipping %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-gl-3">
-              <p>商品合計</p>
-            </div>
-            <div class="col-lg-3">
-              <%= sum_all.to_i %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-gl-3">
-              <p>請求金額</p>
-            </div>
-            <div class="col-lg-3">
-              <% billing_amount = sum_all + @order.shipping %>
-              <%= billing_amount.to_i %>
-            </div>
-          </div>
-        </div>
+      <div class="">
+        <strong>お届け先</strong>
+        <%= @order.postal_code %>
+        <%= @order.address %>
+        <%= @order.name %>
       </div>
-      <div class="row ">
-        <div class="col-gl-2">
-          <strong>支払い方法</strong>
-        </div>
-        <div class="col-gl-4">
-          <%= @order.payment_method %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-gl-2">
-            <strong>お届け先</strong>
-        </div>
-        <div class="col-gl-4">
-          <%= @order.postal_code %><br>
-          <%= @order.address %><br>
-          <%= @order.name %><br>
-        </div>
-      </div>
-
+      <%= f.hidden_field :how_to_pay, :value => "#{@order.payment_method}" %>
+      <%= f.hidden_field :add, :value => "#{@add}" %>
       <%= f.hidden_field :customer_id, :value => current_customer.id %>
       <%= f.hidden_field :post_code, :value => "#{@order.postal_code}" %>
       <%= f.hidden_field :send_to_address, :value => "#{@order.address}" %>
       <%= f.hidden_field :name, :value => "#{@order.name}" %>
-
-      <div class="row">
-        <div class="col-lg-2">
-          <%= f.submit "購入を確定する", class: "btn btn-success btn-lg" %>
-        </div>
+      <div class="">
+        <%= f.submit "購入を確定する", class: "btn btn-success btn-lg" %>
       </div>
     <% end %>
   </div>

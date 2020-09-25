@@ -11,7 +11,7 @@
         <tbody>
           <% @categories.each do |category| %>
             <tr>
-              <td><%= link_to category.name, cart_products_path(category.id), method: :get %></td>
+              <td><%= link_to category.name, products_path(category.id), method: :get %></td>
             </tr>
           <% end %>
         </tbody>
@@ -27,9 +27,9 @@
       <%= @product.introduction %><br>
       <p><strong><span style="font-size: 20px;">¥ <%= @tax.to_i %></span></strong>(税込)</p>
       <!--個数選択-->
-      <%= form_for @cart_product do |f| %>
-        <%= f.select :quantity, options_for_select(1..10), include_blank: "個数を選択してください" %>
-        <%= link_to "カートに入れる", cart_products_create_path(@product), method: :post, class: "btn btn-primary" %>
+      <%= form_for @cart_product,:url=>{controller:"customers/cart_products",action:"create"} do |f| %>
+        <%= f.select :quantity, options_for_select(1..10,selected: 1), include_blank: "個数を選択してください" %>
+        <%= f.submit "カートに入れる", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
