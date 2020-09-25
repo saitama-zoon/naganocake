@@ -2,12 +2,13 @@ class Admins::OrdersController < ApplicationController
 	before_action :authenticate_admin!
 
   def index
-    @orders = Order.all
+    @orders = Order.all.page(params[:page]).per(10)
     #binding.pry
   end
 
   def show
     @order = Order.find(params[:id])
+    @product = @order.order_products
   end
 
   def update
@@ -21,7 +22,7 @@ class Admins::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(
       :created_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status,
-      order_products_attributes:[:id, :product_id, :order_id, :quantity, :price_with_tax, :product_status]
+      order_products_attributes: [:id, :product_id, :order_id, :quantity, :price_with_tax, :product_status]
       )
   end
 end

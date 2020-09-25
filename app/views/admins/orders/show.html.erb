@@ -2,7 +2,7 @@
   <div class="row">
     <h2>注文履歴詳細</h2>
     <%= form_for(@order, url:admins_order_path(@order), method: :patch) do |f| %>
-      <div class="co-lg-8">
+      <div class="col-lg-8">
         <table class="table" style="border:none;">
           <tbody>
             <tr>
@@ -27,7 +27,7 @@
           </tbody>
         </table>
       </div>
-      <div class="co-lg-9">
+      <div class="col-lg-9">
         <table class="table">
           <thead>
             <tr>
@@ -39,20 +39,44 @@
             </tr>
           </thead>
           <tbody>
-            <% @order.order_products.each do |order_product| %>
+            <%= f.fields_for :order_products do |i| %>
               <tr>
-                <td><%= product = Product.find(order_product.product_id).name %></td>
-                <td><%= order_product.price_with_tax %></td>
-                <td><%= order_product.quantity %></td>
-                <td><%= order_product.price_with_tax * order_product.quantity %></td>
-                <td>
-                  <%= f.fields_for :order_products do |i| %>
+                  <td><%= product = Product.find(i.object.product_id).name %></td>
+                  <td><%= i.object.price_with_tax %></td>
+                  <td><%= i.object.quantity %></td>
+                  <td><%= i.object.price_with_tax * i.object.quantity %></td>
+                  <td>
                     <%= i.select :product_status, OrderProduct.product_statuses.keys.map {|l| [I18n.t("enums.order_product.product_status.#{l}"), l]}  %>
                     <%= f.submit '更新', class: 'btn btn-primary' %>
-                  <% end %>
-                </td>
+                  </td>
               </tr>
             <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-3">
+        <table class="table">
+          <thead>
+            <tr><br></tr>
+            <tr><br></tr>
+          </thead>
+          <tbody>
+            <% sum_all = 0 %>
+            <% @order.order_products.each do |order_product| %>
+              <% sum_all += order_product.price_with_tax %>
+            <% end %>
+            <tr>
+              <td>商品合計</td>
+              <td><%= sum_all %></td>
+            </tr>
+            <tr>
+              <td>送料</td>
+              <td><%= @order.shipping %></td>
+            </tr>
+            <tr>
+              <td>請求金額合計</td>
+              <td><%= sum_all + @order.shipping %></td>
+            </tr>
           </tbody>
         </table>
       </div>

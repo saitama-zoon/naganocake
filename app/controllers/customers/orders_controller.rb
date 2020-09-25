@@ -41,7 +41,7 @@ class Customers::OrdersController < ApplicationController
       end
 
       current_customer.cart_products.each do |cart_puroduct|
-        order_product = @order.order_products.new
+        order_product = @order.order_products.build
         order_product.order_id = @order.id
         order_product.product_id = cart_puroduct.product_id
         order_product.quantity = cart_puroduct.quantity

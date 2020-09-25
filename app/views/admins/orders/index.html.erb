@@ -21,10 +21,10 @@
               <td>
                 <%= order.id %>
               </td>
-              <td><%= order.created_at.strftime('%Y/%m/%d %h:%m') %></td>
+              <td><%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
               <td>
                 <!-- 詳細へリンク -->
-                <%= link_to order.name, admins_order_path(order) %>
+                <%= link_to order.customer.first_name + order.customer.last_name, admins_order_path(order) %>
               </td>
               <td>
                 <% quantity_all = 0 %>
@@ -39,6 +39,9 @@
           <% end %>
         </tbody>
       </table>
+      <div class="co-lg-12" style="text-align: center;">
+        <%= paginate(@orders) %>
+      </div>
     </div>
   </div>
 </div>
