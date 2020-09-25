@@ -11,23 +11,23 @@
  　　     </div>
          <div class="col-lg-9">
  　　　      <%= f.label :name, "商品名　" %>
-          <span style="font-size: 18px; padding-left: 10px; ">
+          <span style="font-size: 17px; padding-left: 10px; ">
  　　　      <%= f.text_field :name %><br>
           </span>
  　　　      <%= f.label :introduction, "商品説明" %>
-          <span style="font-size: 18px; padding-left: 10px;">
+          <span style="font-size: 17px; padding-left: 10px;">
  　　　      <%= f.text_field :introduction %><br>
           </span>
  　　　      <%= f.label :name, "ジャンル" %>
-          <span style="font-size: 18px; padding-left: 10px;">
+          <span style="font-size: 17px; padding-left: 10px;">
  　　　      <%= f.collection_select(:category_id, Category.all, :id, :name) %><br>
           </span>
  　　　      <%= f.label :price, "税抜価格" %>
-          <span style="font-size: 18px; padding-left: 10px;">
+          <span style="font-size: 17px; padding-left: 10px;">
  　　　      <%= f.text_field :price %>円<br>
           </span>
  　　　      <%= f.label :is_sale_status, "販売ステータス" %>
-          <span style="font-size: 18px; padding-left: 10px;">
+          <span style="font-size: 17px; padding-left: 10px;">
  　　　      <%= f.select :is_sale_status, ["販売中", "売切中"] %>
           </span>
  　　　   </div>
