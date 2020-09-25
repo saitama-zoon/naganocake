@@ -19,7 +19,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+}
 
 header{
 	height: 100px;
@@ -35,10 +35,12 @@ ul {
 
 body{
 	padding-top: 150px;
-    background-color: #2b3e50;
 }
-footer{
-	height: 100px;
+.wrapper {
+  min-height: calc(100vh - 100px);
+}
+footer {
+  height: 100px;
 }
 
  @import "bootstrap-sprockets";

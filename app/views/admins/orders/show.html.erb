@@ -1,36 +1,36 @@
 <div class="container">
   <div class="row">
-    <h2>注文履歴詳細</h2>
+    <h4 style="padding-bottom: 10px; padding-left: 20px;"><span style="background-color:#f8f8f8;">注文履歴詳細</span></h4>
     <%= form_for(@order, url:admins_order_path(@order), method: :patch) do |f| %>
       <div class="col-lg-8">
-        <table class="table" style="border:none;">
+        <table class="table table-noborder" style="width: 500px">
           <tbody>
             <tr>
-              <td>購入者</td>
-              <td><%= @order.name %></td>
+              <td style="border: none;"><strong>購入者</strong></td>
+              <td style="border: none;"><%= @order.name %></td>
             </tr>
             <tr>
-              <td>配送先</td>
-              <td><%= @order.address %></td>
+              <td style="border: none;"><strong>配送先</strong></td>
+              <td style="border: none;"><%= @order.address %></td>
             </tr>
             <tr>
-              <td>支払方法</td>
-              <td><%= @order.payment_method_i18n %></td>
+              <td style="border: none;"><strong>支払方法</strong></td>
+              <td style="border: none;"><%= @order.payment_method_i18n %></td>
             </tr>
             <tr>
-              <td>注文ステータス</td>
-              <td>
+              <td style="border: none;"><strong>注文ステータス</strong></td>
+              <td style="border: none;">
                 <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]}  %>
-                <%= f.submit '更新', class: 'btn btn-primary' %>
+                <%= f.submit '更新', class: 'btn btn-primary btn-xs' %>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="col-lg-9">
-        <table class="table">
+        <table class="table" style="width: 800px">
           <thead>
-            <tr>
+            <tr class="active">
               <th>商品名</th>
               <th>単価(税込)</th>
               <th>数量</th>
@@ -47,7 +47,7 @@
                   <td><%= i.object.price_with_tax * i.object.quantity %></td>
                   <td>
                     <%= i.select :product_status, OrderProduct.product_statuses.keys.map {|l| [I18n.t("enums.order_product.product_status.#{l}"), l]}  %>
-                    <%= f.submit '更新', class: 'btn btn-primary' %>
+                    <%= f.submit '更新', class: 'btn btn-primary btn-xs' %>
                   </td>
               </tr>
             <% end %>
@@ -66,16 +66,16 @@
               <% sum_all += order_product.price_with_tax %>
             <% end %>
             <tr>
-              <td>商品合計</td>
-              <td><%= sum_all %></td>
+              <td style="border: none;"><strong>商品合計</strong></td>
+              <td style="border: none;"><%= sum_all %></td>
             </tr>
             <tr>
-              <td>送料</td>
-              <td><%= @order.shipping %></td>
+              <td style="border: none;"><strong>送料</strong></td>
+              <td style="border: none;"><%= @order.shipping %></td>
             </tr>
             <tr>
-              <td>請求金額合計</td>
-              <td><%= sum_all + @order.shipping %></td>
+              <td style="border: none;"><strong>請求金額合計</strong></td>
+              <td style="border: none;"><strong><%= sum_all + @order.shipping %></strong></td>
             </tr>
           </tbody>
         </table>
