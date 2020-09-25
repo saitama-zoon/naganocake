@@ -1,22 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-6">
-      <h2>ジャンル一覧・追加</h2>
+    <div class="col-lg-5">
+      <h2 style="font-size: 25px; padding-bottom: 10px;"><span style="background-color:#f8f8f8;">　ジャンル一覧・追加　</h2>
         <%= form_with(model: @category, url: '/admins/categories', local: true) do |f| %>
-          <div class="form">
+          <div class="form" style="margin-bottom: 10px;">
             <%= f.label :name, "ジャンル" %>
-            <%= f.text_field :name %>
+           <span style="font-size: 15px; padding-left: 10px;"> <%= f.text_field :name %>
             <%= f.radio_button :is_effective, :true %>
             <%= f.label :is_effective, "有効", {value: true} %>
             <%= f.radio_button :is_effective, :false %>
             <%= f.label :is_effective, "無効", {value: false} %>
+           </span>
             <%= f.submit "追加", class: "btn btn-primary" %>
           </div>
         <% end %>
 
-        <table class="table">
+        <table class="table" style="border: 1px solid #696969; width: 400px">
           <thead>
-            <tr>
+            <tr class="active">
               <th>ジャンル</th>
               <th>状態</th>
               <th></th>
@@ -27,7 +28,7 @@
             <% @categories.each do |category| %>
               <tr>
                 <td><%= category.name %></td>
-                <td><%= category.is_effective ? '有効' : '無効' %></td>
+                <td><%= category.is_effective ? '有効　　' : '無効　　' %></td>
                 <td><%= link_to "編集する", edit_admins_category_path(category.id), class: "btn btn-primary" %></td>
               </tr>
             <% end %>
