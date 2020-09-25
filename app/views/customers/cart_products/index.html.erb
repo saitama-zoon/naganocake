@@ -1,7 +1,9 @@
 <div class="container">
-  <h1 style="background-color: red;">
-    ショッピングカート</h1>
-    <%= link_to "カートを空にする", cart_products_destroy_all_path, method: :delete, class: "btn btn-primary" %>
+  <div class="row">
+  <h4><mark style="background-color: #F8F8F8F8;">ショッピングカート</mark></h4>
+      <div class="col-lg-offset-10">
+    <%= link_to "カートを空にする", cart_products_destroy_all_path, method: :delete, class: "btn btn-danger" %>
+</div>
     <!-- destrpy_allにてcart_productsを一斉削除 -->
   <table class="table">
     <tr>
@@ -23,17 +25,20 @@
 		  <%= item.product.price*11/10*item.quantity %>
 		</td>
 		<td>
-		  <%= link_to "削除する", cart_product_path(item),method: :delete, class: "btn btn-primary" %>
+		  <%= link_to "削除する", cart_product_path(item),method: :delete, class: "btn btn-danger" %>
 		</td>
 	  </tr>
 	<% end %>
   </table>
   <%= link_to "買い物を続ける", products_path, class: "btn btn-primary" %>
-  <table class="table" style="text-align: center;">
+  <table class="table">
     <tr>
       <th>合計金額</th>
       <td><%= @total_price %></td>
     </tr>
   </table>
-  <%= link_to "情報入力に進む",new_order_path, class: "btn btn-primary" %>
+  <span style="text-align: center;">
+  <%= link_to "情報入力に進む",new_order_path, class: "btn btn-success btn-lg" %>
+</span>
+</div>
 </div>

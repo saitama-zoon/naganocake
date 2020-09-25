@@ -4,18 +4,17 @@
     <title>Naganocake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-     <header class="navbar navbar-fixed-top navbar-default" >
+    <header class="navbar navbar-default">
       <div class="container">
-       <nav class="nav navbar-nav navbar-left">
-         <%= link_to image_tag("logo.png", class: "logo"), home_path %>
-       </nav>
-       <nav>
+        <nav class="nav navbar-nav navbar-left">
+          <%= link_to image_tag("logo.png", class: "logo"), home_path %>
+        </nav>
+        <nav>
           <ul class="nav navbar-nav navbar-right ">
             <% if customer_signed_in? %>
               <li><%= link_to 'マイページ', customer_path, class: '' %></li>
@@ -40,6 +39,7 @@
     </header>
 
     <%= yield %>
-    <footer class="navbar navbar-fixed-bottom navbar-default"></footer>
+
+    <footer class="navbar navbar-default"></footer>
   </body>
 </html>

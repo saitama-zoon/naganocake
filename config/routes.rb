@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :products,only:[:index,:show]
     #ジャンル検索機能アクション
     get 'search/:id' => "products#search", as: 'search_products'
+
     resources :cart_products, only:[:index, :update, :destroy]
     post "cart_product/:id" => "cart_products#create",as: "cart_products_create"
     #creatアクションに商品idが必要になるためresourcesとは別で定義
