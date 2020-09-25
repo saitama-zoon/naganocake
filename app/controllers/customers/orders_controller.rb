@@ -16,7 +16,7 @@ class Customers::OrdersController < ApplicationController
       #送り先情報をorderへ保存
       case @add
         when 1
-          @order.postal_code = @customer.post_code
+          @order.postal_code = @customer.postal_code
           @order.address = @customer.address
           @order.name = @customer.first_name + @customer.last_name
         when 2

@@ -18,7 +18,6 @@
         <%= f.label :is_sale_status, "販売ステータス" %>
         <%= @product.is_sale_status ? '販売中' : '売切中' %>
       </div>
-
       <div class="col-lg-2">
         <%= link_to "編集する", edit_admins_product_path(@product.id), class: "btn btn-primary" %>
       </div>
