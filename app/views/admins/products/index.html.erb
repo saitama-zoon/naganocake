@@ -1,11 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-14">
-      <h2>商品一覧</h2>
+
+    <div class="col-lg-10 col-lg-offset-1">
+      <h2 style="font-size: 25px; padding-bottom: 10px;"><span style="background-color:#f8f8f8;">　商品一覧　</span></h2>
+
       <%= link_to "（+アイコンを表示して新規投稿画面へ遷移）", new_admins_product_path %>
+
         <table class="table">
           <thead>
-            <tr>
+            <tr class="active">
               <th>商品ID</th>
               <th>商品名</th>
               <th>税抜価格</th>
