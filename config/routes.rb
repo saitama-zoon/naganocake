@@ -17,16 +17,18 @@ Rails.application.routes.draw do
     resources :products,only:[:index,:show]
     #ジャンル検索機能アクション
     get 'search/:id' => "products#search", as: 'search_products'
+
     resources :cart_products, only:[:index, :update, :destroy]
     post "cart_product/:id" => "cart_products#create",as: "cart_products_create"
     #creatアクションに商品idが必要になるためresourcesとは別で定義
     delete "cart_products" => "cart_products#destroy_all",as: "cart_products_destroy_all"
+
     resources :'cart_products', only:[:index, :create, :update, :destroy]
     resources :'orders', only:[:new, :create, :index, :show]
     post "orders/confirm" => "orders#confirm",as: "confirm"
     get "orders/thank" => "orders#thank",as: "thank"
-    #post "orders/session" => "orders#session",as: "session
   end
+
   devise_for :admins, controllers: {
           sessions: 'admins/sessions'
   }

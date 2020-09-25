@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <h2>注文履歴一覧</h2>
+    <div class="co-lg-12">
+      <table class="table table-bordered">
+        <thead class="">
+          <tr>
+            <th>注文日</th>
+            <th>配送先</th>
+            <th>注文商品</th>
+            <th>支払金額</th>
+            <th>ステータス</th>
+            <th>注文詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+              <td>
+                <%= order.postal_code %><br>
+                <%= order.address %><br>
+                <%= order.name %><br>
+              </td>
+              <td>
+                <% sum_all = 0 %>
+                <% order.order_products.each do |order_product| %>
+                  <%= product = Product.find(order_product.product_id).name %><br>
+                  <% sum_all += order_product.price_with_tax %>
+                <% end %>
+              </td>
+              <td><%= sum_all %>円</td>
+              <!-- enum日本語化 -->
+              <td><%= order.order_status_i18n %></td>
+              <td><%= link_to '表示する', order_path(order), class: "btn btn-sm btn-primary" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
