@@ -1,17 +1,22 @@
-<h2>管理者ログイン</h2>
+<div class="container">
+  <div class="row">
+   <div class='col-lg-6 col-lg-offset-4' >
+      <h2 style="font-size: 25px; padding-bottom: 10px; padding-left: 30px;"><span style="background-color:#f8f8f8;">　管理者ログイン　</span></h2>
+      <%= form_for(resource, as: resource_name, url: session_path(      resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :メールアドレス %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete:       "メールアドレスを入力してください" , :size => "40*30"%>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "メールアドレスを入力してください" %>
-  </div>
+        <div class="field">
+          <%= f.label :パスワード %><br />
+          <%= f.password_field :password, autocomplete: "      パスワードを入力してください" , :size => "40*30"%>
+        </div>
 
-  <div class="field">
-    <%= f.label :パスワード %><br />
-    <%= f.password_field :password, autocomplete: "パスワードを入力してください" %>
+        <div class="actions" style="margin-top: 10px; padding-left: 110px;">
+          <%= f.submit "ログイン" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
+</div>
