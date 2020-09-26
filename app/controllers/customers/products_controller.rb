@@ -2,13 +2,13 @@ class Customers::ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    @categories = Category.all
+    @categories = Category.where(is_effective: "true" )
   end
 
   def show
   	@product = Product.find(params[:id])
   	@cart_product = CartProduct.new
-  	@categories = Category.all
+  	@categories = Category.where(is_effective: "true" )
     @tax = @product.price * 1.1
   end
   #ジャンル検索機能
