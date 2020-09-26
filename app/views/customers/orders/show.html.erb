@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
-    <h2>注文履歴詳細</h2>
+    <h4><mark style="background-color: #F8F8F8F8;">注文履歴詳細</mark></h4>
     <div class="col-lg-9">
-      <h3>注文情報</h3>
+      <h4><strong>注文情報</strong></h4>
       <table class="table table-bordered" >
         <tbody>
           <tr>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="col-lg-3">
-      <h3>請求情報</h3>
+      <h4><strong>請求情報</strong></h4>
       <table class="table table-bordered">
         <tbody>
           <% sum_all = 0 %>
@@ -42,14 +42,14 @@
               <td><%= @order.shipping %></td>
             </tr>
             <tr>
-              <td>ご請求額</td>
-              <td><%= sum_all + @order.shipping %></td>
+              <td><strong>ご請求額</strong></td>
+              <td><strong><%= sum_all + @order.shipping %></strong></td>
             </tr>
         </tbody>
       </table>
     </div>
     <div class="col-lg-10">
-      <h3>注文内容</h3>
+      <h4><strong>注文内容</strong></h4>
       <table class="table table-bordered">
         <thead>
           <tr>

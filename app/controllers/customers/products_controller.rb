@@ -2,7 +2,12 @@ class Customers::ProductsController < ApplicationController
 
   def index
     @products = Product.all
+<<<<<<< HEAD
     @categories = Category.where(is_effective: "true" )
+=======
+    @categories = Category.all
+    @products = Product.page(params[:page]).per(8)
+>>>>>>> origin
   end
 
   def show
@@ -13,7 +18,7 @@ class Customers::ProductsController < ApplicationController
   end
   #ジャンル検索機能
   def search
-  	@products = Product.where(category_id: params[:id])
+  	@products = Product.where(category_id: params[:id]).page(params[:page]).per(8)
     @quantity = Product.where(category_id: params[:id]).count
     @categories = Category.where(is_effective: "true" )
     #binding.pry
