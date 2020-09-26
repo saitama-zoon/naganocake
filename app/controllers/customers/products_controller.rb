@@ -2,12 +2,8 @@ class Customers::ProductsController < ApplicationController
 
   def index
     @products = Product.all
-<<<<<<< HEAD
     @categories = Category.where(is_effective: "true" )
-=======
-    @categories = Category.all
     @products = Product.page(params[:page]).per(8)
->>>>>>> origin
   end
 
   def show
