@@ -3,6 +3,7 @@ class Customers::ProductsController < ApplicationController
   def index
     @products = Product.all
     @categories = Category.all
+    @products = Product.page(params[:page]).per(8)
   end
 
   def show
