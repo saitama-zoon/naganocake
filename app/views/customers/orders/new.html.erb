@@ -2,25 +2,25 @@
 <div class=" container ">
   <div class="row">
     <div class="col-lg-4">
-      <h2>注文情報入力</h2>
+      <h4><mark style="background-color: #F8F8F8F8;">注文情報入力</mark></h4>
     </div>
   </div>
 
   <%= form_with(model: @order, local: true, url: {action: 'confirm'}) do |f| %>
     <div class="row space">
-      <h3><strong><%= f.label :支払い方法 %></strong></h3>
+      <h5><strong><%= f.label :支払い方法 %></strong></h5>
     </div>
     <!-- 支払い方法選択ラジオボタン -->
     <div class="row field">
       <div class="col-lg-4 btn-group" data-togle="buttons">
         <p>
-          <label class="btn btn-outline-secondary active" >
+          <label class="btn btn-outline-secondary" >
             <!-- :how_to_pay→confirm actionへparamを渡す -->
             <%= f.radio_button :how_to_pay, 1, {checked: true} %>クレジットカード
           </label>
         </p>
         <p>
-          <label class="btn btn-outline-secondary" >
+          <label class="btn btn-outline-secondary">
             <%= f.radio_button :how_to_pay, 2, {} %>銀行振込
           </label>
         </p>
@@ -28,13 +28,13 @@
     </div>
     <!-- 配送先入力フォーム -->
     <div class="row">
-      <h3><strong><%= f.label :お届け先 %></strong></h3>
+      <h5><strong><%= f.label :お届け先 %></strong></h5>
     </div>
     <!-- 自身の住所 -->
     <div class="row">
       <p>
-        <label><%= f.radio_button :add, 1, checked: true,checked: "checked" %>
-          ご自身の住所
+        <label class="btn btn-outline-secondary"><%= f.radio_button :add, 1, checked: true,checked: "checked" %>
+        ご自身の住所
         </label><br>
         <!-- customers(current_customer) テーブルより出力 -->
         <%= @customer.postal_code %>
@@ -45,7 +45,7 @@
     <!-- 登録済み住所 -->
     <div class="row">
       <p>
-        <label>
+        <label class="btn btn-outline-secondary">
           <%= f.radio_button :add, 2, style: "" %>登録住所から選択
         </label><br>
         <!-- プルダウン機能 :send_to_address→confirm actionへparamを渡す -->
@@ -56,7 +56,7 @@
     <!-- 新しい配送先 -->
     <div class="row">
       <p>
-        <label>
+        <label class="btn btn-outline-secondary">
           <%= f.radio_button :add, 3, style: "" %>新しいお届け先
         </label><br>
       </p>
@@ -65,36 +65,23 @@
         <%= f.fields_for :new_add do |add|%>
           <div class="row">
             <div class="">
-              <p>郵便番号(ハイフンなし)</p>
+                <p>郵便番号(ハイフンなし)</p>
+                <p><%= add.text_field :postal_code, class: "form-control", style: "width: 100px;" %></p>
             </div>
-            <div class="">
-              <%= add.text_field :postal_code, class: "form-control" %>
-            </div>
-          </div>
-
-          <div class="row">
             <div class="">
               <p>住所</p>
+              <p><%= add.text_field :address, class: "form-control",  style: "width: 400px;" %></p>
             </div>
-            <div class="">
-              <%= add.text_field :address, class: "form-control" %>
-            </div>
-          </div>
-
-          <div class="row">
             <div class="">
               <p>宛名</p>
+              <p><%= add.text_field :name, class: "form-control", style: "width: 150px;" %></p>
             </div>
-            <div class="">
-              <%= add.text_field :name, class: "form-control" %>
-            </div>
-          </div>
         <% end %>
       </div>
     </div>
 
     <!-- 確認画面へ進むボタン -->
-    <div class="actions row">
+    <div class="actions row" style="text-align: center;">
       <%= f.submit "確認画面へ進む",class: "btn btn-primary" %>
     </div>
   <% end %>
