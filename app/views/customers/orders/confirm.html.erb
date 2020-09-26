@@ -23,7 +23,7 @@
                 </td>
                 <td>
                   <!-- 単価（税込） -->
-                  <%= cart_product.product.price %>
+                  <%= cart_product.product.price*11/10 %>
                 </td>
                 <td>
                   <!-- 商品数量 -->
@@ -31,7 +31,7 @@
                 </td>
                 <td>
                   <!-- 商品小計(個数*金額) -->
-                  <%= sum_product = cart_product.product.price * cart_product.quantity %>
+                  <%= sum_product = cart_product.product.price*11/10*cart_product.quantity %>
                   <% sum_all += sum_product %>
                 </td>
               </tr>
