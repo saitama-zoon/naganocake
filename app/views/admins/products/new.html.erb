@@ -29,7 +29,7 @@
       </span>
         <%= f.label :is_sale_status, "販売ステータス" %>
       <span style="font-size: 17px; padding-left: 10px; ">
-        <%= f.select :is_sale_status, ["販売中", "売切中"], include_blank: "-- 選択してください --" %>
+        <%= f.select :is_sale_status, [["販売中", true], ["売切中", false]], include_blank: "-- 選択してください --" %>
       </span>
       </div>
 

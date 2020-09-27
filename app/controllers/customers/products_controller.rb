@@ -19,7 +19,8 @@ class Customers::ProductsController < ApplicationController
   	@products = Product.where(category_id: params[:id]).page(params[:page]).per(8)
     @quantity = Product.where(category_id: params[:id]).count
     @categories = Category.where(is_effective: "true" )
-    @title = Category.name
+    category = Category.find(params[:id])
+    @title = category.name
     #binding.pry
     render 'index'
   end
