@@ -1,8 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6">
-      <h2 style="font-size: 25px; padding-bottom: 10px;">
-        <span style="background-color:#f8f8f8;">　ジャンル編集　</span></h2>
+        <h4 style="padding-bottom: 10px;"><span style="background-color:#f8f8f8;">　ジャンル編集　</span></h4>
         <%= form_with(model: @category, url: admins_category_path(@category), local: true) do |f| %>
           <div class="form">
             <%= f.label :name, "ジャンル" %>

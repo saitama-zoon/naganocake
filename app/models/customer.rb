@@ -8,7 +8,7 @@ class Customer < ApplicationRecord
   has_many :destinations, dependent: :destroy
 
 
-  enum is_member: {Available: true, Invalid: false}
+  validates :is_member, inclusion: { in: [true, false] }
   #有効会員はtrue、退会済み会員はfalse
    def active_for_authentication?
         super && (self.is_member === "Available")
