@@ -3,6 +3,12 @@
     <div class="col" style="text-align: center; padding-top: 100px;">
       <h4><mark style="background-color: #F8F8F8F8;">会員の方はこちらからログイン</mark></h4>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%# ここからエラーメッセージ %>
+        <% if alert %>
+         <p class="alert alert-error">
+         <%= alert %></p>
+         <% end %>
+        <%# ここまでエラーメッセージ %>
         <div class="field" style="padding-top: 25px;">
           <%= f.label :メールアドレス, style: 'padding-left: 300px;' %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", style: 'width: 300px;' %>
