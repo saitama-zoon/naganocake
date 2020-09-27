@@ -11,7 +11,7 @@
  　　     </div>
          <div class="col-lg-9">
  　　　      <%= f.label :name, "商品名　" %>
-          <span style="font-size: 17px; padding-left: 10px; ">
+          <span style="font-size: 17px; padding-left: 10px;">
  　　　      <%= f.text_field :name %><br>
           </span>
  　　　      <%= f.label :introduction, "商品説明" %>
@@ -28,7 +28,7 @@
           </span>
  　　　      <%= f.label :is_sale_status, "販売ステータス" %>
           <span style="font-size: 17px; padding-left: 10px;">
- 　　　      <%= f.select :is_sale_status, ["販売中", "売切中"] %>
+ 　　　      <%= f.select :is_sale_status, [["販売中", true], ["売切中", false]] %>
           </span>
  　　　   </div>
       </div>
