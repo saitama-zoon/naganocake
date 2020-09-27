@@ -48,7 +48,7 @@
       <tr>
         <td>郵便番号(ハイフンなし)</td>
         <td><div class="field">
-            <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+            <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", id:"customer_postcode" %>
             </div>
         </td>
         <td>
@@ -57,7 +57,7 @@
       <tr>
         <td>住所</td>
         <td><div class="field">
-            <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+            <%= f.text_field :address, autofocus: true, autocomplete: "address",id:"customer_address" %>
             </div>
         </td>
       </tr>
