@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-2">
-      <table class="table" style="border: 1px solid #696969; height: 100px">
+      <table class="table" style="border: 1px solid #696969; height: 100px;">
         <thead>
           <tr>
             <th>ジャンル検索</th>
@@ -20,11 +20,13 @@
 
     <div class="col-lg-10">
       <div class="main-visual">
-        <div class="main-visual-text">
+        <div class="main-visual-content">
+          <p class="main-visual-text">
           ようこそ、NaganoCakeへ！<br>
           このサイトは、ケーキ販売のECサイトになります。<br>
           会員でない方も商品の閲覧はできますが、<br>
           購入には会員登録が必要になります。
+          </p>
         </div>
       </div>
       <br>
@@ -32,9 +34,9 @@
         <strong>オススメ商品</strong>
       </h2>
       <% @products.each do |product| %>
-        <div class="box" style="float:left; margin-right:0px;">
+        <div class="box" style="float:left; margin-right:0px; padding-right: 15px">
           <%= link_to product_path(product.id) do %>
-            <%= attachment_image_tag product, :image, size: "150x100", format: 'jpeg', fallback: 'no_image.png' %>
+            <%= attachment_image_tag product, :image, :fill, 180, 100, format: 'jpeg', fallback: 'no_image.png' %>
           <% end %>
 　　　　   <p><strong><%= product.name %></strong></p>
 　　　　   <p><strong>¥<%= product.price %></strong></p>

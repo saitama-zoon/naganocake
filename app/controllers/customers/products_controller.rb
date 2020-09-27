@@ -4,6 +4,7 @@ class Customers::ProductsController < ApplicationController
     @products = Product.all
     @categories = Category.where(is_effective: "true" )
     @products = Product.page(params[:page]).per(8)
+    @title = "商品"
   end
 
   def show
@@ -17,6 +18,7 @@ class Customers::ProductsController < ApplicationController
   	@products = Product.where(category_id: params[:id]).page(params[:page]).per(8)
     @quantity = Product.where(category_id: params[:id]).count
     @categories = Category.where(is_effective: "true" )
+    @title = Category.name
     #binding.pry
     render 'index'
   end
