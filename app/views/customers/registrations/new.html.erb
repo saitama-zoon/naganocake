@@ -50,7 +50,7 @@
               <td>郵便番号(ハイフンなし)</td>
               <td>
                 <div class="field">
-                  <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+                  <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", id:"customer_postcode" %>
                 </div>
               </td>
               <td></td>
@@ -59,7 +59,7 @@
               <td>住所</td>
               <td>
                 <div class="field">
-                  <%= f.text_field :address, autofocus: true, autocomplete: "address", style: "width: 500px;" %>
+                  <%= f.text_field :address, autofocus: true, autocomplete: "address", style: "width: 500px;",id:"customer_address" %>
                 </div>
               </td>
             </tr>
@@ -94,7 +94,6 @@
          <%= f.submit "新規登録", class: "btn btn-success btn-lg" %>
        </div>
       <% end %>
-
       <h4><mark style="background-color: #F8F8F8F8;">既に登録済みの方</mark></h4>
       <%= link_to "こちら", new_session_path(resource_name) %>からログインしてください。
     </div>
