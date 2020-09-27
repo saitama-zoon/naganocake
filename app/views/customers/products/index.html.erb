@@ -19,10 +19,11 @@
     </div>
 
     <div class="col-lg-10">
-      <h2>
-        <strong>商品一覧</strong>
-        <span style="font-size: 20px;"> (全<%= @products.count %>件)</span>
-      </h2>
+    　　<h2>
+      　  <strong><%= @title %>一覧</strong>
+          <span style="font-size: 20px;"> (全<%= @products.count %>件)</span>
+    　　</h2>
+
       <% @products.each do |product| %>
         <div class="box" style="float: left; margin-right: 0px; padding-top: 50px;">
           <%= link_to product_path(product.id) do %>
@@ -32,6 +33,7 @@
 　　　　   <p><strong>¥<%= product.price %></strong></p>
         </div>
       <% end %>
+
       <%= paginate @products %>
     </div>
   </div>
