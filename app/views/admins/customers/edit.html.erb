@@ -6,7 +6,20 @@
           	</span>
           </h4>
 
-            <%= form_with model: @customer, url: admins_customer_path(@customer.id),local: true do |f| %>
+          <%= form_with model: @customer, url: admins_customer_path(@customer.id),local: true do |f| %>
+          <%# ここからエラーメッセージ %>
+            <% if @customer.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this destination from being saved:</h2>
+          
+                <ul>
+                  <% @customer.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <%# ここまでエラーメッセージ %>
    　   <table class="table" style="width: 800px;">
       <thead>
         </thead>
