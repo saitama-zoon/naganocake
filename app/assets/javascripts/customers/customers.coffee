@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'turbolinks:load', ->
   $("#customer_postcode").jpostal({
     postcode : [ "#customer_postcode" ],
     address  : {
