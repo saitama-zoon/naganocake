@@ -59,6 +59,7 @@ class Customers::OrdersController < ApplicationController
 
   def index
     @orders = @customer.orders
+    binding.pry
   end
 
   def show
