@@ -10,12 +10,16 @@ body{
 
 .logo{
 	margin-top: 10px;
+	filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
 }
 .main-visual{
+	width: 881px;
 	height: 300px;
-	background-image: url("<%= asset_path('pancake.jpg') %>");
+	background-image: url("<%= asset_path('mousse_cake.jpg') %>");
 	background-size: cover;
 	background-posotion: center;
+	border-radius: 25px;
+	filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
 }
 .main-visual-content{
 	padding-top: 10px;
@@ -23,6 +27,7 @@ body{
   	justify-content: center;
   	align-items: center;
 	background-color: rgba( 0, 0, 0, 0.5);
+	border-radius: 25px;
 }
 .main-visual-text{
 	font-family: "Hiragino Mincho ProN";
@@ -31,3 +36,6 @@ body{
 	text-align: center;
 }
 
+.shadow{
+	text-shadow: 1px 1px 2px silver;
+}

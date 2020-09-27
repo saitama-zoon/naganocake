@@ -5,6 +5,7 @@ class Customers::ProductsController < ApplicationController
     @categories = Category.where(is_effective: "true" )
     @products = Product.page(params[:page]).per(8)
     @title = "商品"
+
   end
 
   def show

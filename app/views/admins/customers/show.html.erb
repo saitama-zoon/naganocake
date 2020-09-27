@@ -8,7 +8,7 @@
 	<tr>
 		<th style="padding-bottom: 10px">顧客ID</th>
 		<td style="padding-bottom: 10px; font-size: 17px;"><%= @customer.id %>
-			<% if @customer.is_member == true %>
+			<% if @customer.is_member == "Available" %>
 				有効
 			<% else %>
 				無効
