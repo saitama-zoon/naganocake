@@ -21,6 +21,15 @@ class Customers::ProductsController < ApplicationController
     render 'index'
   end
 
+  def name_search
+    category=Product.where(category_id: params[:category_id])
+    product=category.where(['name LIKE?',"%#{params[:seach]}%"])
+    @products=product.page(params[:page]).per(8)
+    @quantity=product.count
+    @categories=Category.where(is_effective: "true" )
+    render action: :index
+  end
+
   private
   def product_params
    params.require(:product).permit(:name, :introduction, :image, :price)
