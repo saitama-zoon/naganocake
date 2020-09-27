@@ -1,9 +1,9 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-9">
-			<h1>会員一覧</h1>
-			<table class="table">
-				<tr>
+		<div class="col-lg-8 col-lg-offset-2">
+			<h2 style="font-size: 25px; padding-bottom: 10px;"><span style="background-color:#f8f8f8;">　会員一覧　</h2>
+			<table class="table" style="margin-top: 20px;">
+				<tr class="active">
 					<th>会員ID</th><th>氏名</th><th>メールアドレス</th><th>ステータス</th>
 				</tr>
 				<% @customers.each do |customer| %>
@@ -19,7 +19,7 @@
 					<td><% if customer.is_member == "Available" %>
 							有効
 						<% else %>
-							無効
+							退会済み
 						<% end %>
 					</td>
 				</tr>

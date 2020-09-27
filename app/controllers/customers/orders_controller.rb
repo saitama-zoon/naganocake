@@ -41,7 +41,7 @@ class Customers::OrdersController < ApplicationController
       end
 
       current_customer.cart_products.each do |cart_puroduct|
-        order_product = @order.order_products.new
+        order_product = @order.order_products.build
         order_product.order_id = @order.id
         order_product.product_id = cart_puroduct.product_id
         order_product.quantity = cart_puroduct.quantity
@@ -70,8 +70,6 @@ class Customers::OrdersController < ApplicationController
   end
 
   #binding.pry
-  def update
-  end
 
   #new viewから入力値を受け取り条件に合わせて分岐処理
   def confirm
@@ -121,6 +119,9 @@ class Customers::OrdersController < ApplicationController
 
   #order_productsとの紐付け必要...
   def order_params
-    params.require(:order).permit(:created_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status)
+    params.require(:order).permit(
+      :created_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status,
+      order_products_attributes: [:id, :product_id, :order_id, :quantity, :price_with_tax, :product_status]
+      )
   end
 end

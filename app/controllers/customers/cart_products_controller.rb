@@ -3,7 +3,7 @@ class Customers::CartProductsController < ApplicationController
 	before_action :setup_cart_product!, only: [:create]
 
 	def index
-		@cart_products = current_customer.cart_products
+		@cart_products=current_customer.cart_products
 		@total_price=0
 		@cart_products.each do |item|
 			subtotal_price=item.product.price*item.quantity
@@ -11,7 +11,7 @@ class Customers::CartProductsController < ApplicationController
 			#小径の切り捨て価格を計算した後に合計金額に加算
 			@total_price += tax_subtotal_price
 			#binding.pry
-	    end
+		end
 	end
 
 	def create
@@ -23,9 +23,11 @@ class Customers::CartProductsController < ApplicationController
 			@cart_product.product_id = product.id
 		end
         if @cart_product.quantity == nil
-		   @cart_product.quantity = 1
+		   @cart_product.quantity = params[:cart_product][:quantity].to_i
 		else
-		  total_quantity = @cart_product.quantity + 1
+			new_quantity=params[:cart_product][:quantity].to_i
+			#binding.pry
+		  total_quantity = @cart_product.quantity + new_quantity
 		  @cart_product.quantity =  total_quantity
 		end
 		@cart_product.save

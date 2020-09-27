@@ -1,5 +1,12 @@
-<h2>管理者画面</h2>
-<h4>本日の注文件数</h4>
-<a>8</a>
-<span>件</span>
-<%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+<div class="container">
+	<div class="row">
+ 	  <div class='col-lg-12'>
+        <h2 style="font-size: 25px; padding-bottom: 10px;"><span style="background-color:#f8f8f8;">　管理者画面　</span></h2>
+      </div>
+      <div class='col-lg-12'>
+        <h3>本日の注文件数　　<a>8</a>
+        件</h3>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+      </div>
+    </div>
+</div>
