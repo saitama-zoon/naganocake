@@ -13,14 +13,21 @@ body{
 }
 .main-visual{
 	height: 300px;
-	background-image: url("<%= asset_path('mousse_cake.jpg') %>");
+	background-image: url("<%= asset_path('pancake.jpg') %>");
 	background-size: cover;
 	background-posotion: center;
 }
-.main-visual-text{
-	font-size:19px;
-	color: #fff;
+.main-visual-content{
+	padding-top: 10px;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
 	background-color: rgba( 0, 0, 0, 0.5);
+}
+.main-visual-text{
+	font-family: "Hiragino Mincho ProN";
+	font-size:18px;
+	color: #fff;
 	text-align: center;
 }
 

@@ -10,13 +10,14 @@ Rails.application.routes.draw do
   get 'homes/about' => "customers/homes#about",as: 'about'
 
   scope module: 'customers' do
-    resource :'customer', only:[:show, :edit, :update]
+    resource :customer, only:[:show, :edit, :update]
     get 'customer/withdrawl'=> "customers#withdrawl"
     patch 'customer/withdrawl' => "customers#hide"
     resources :destinations, only:[:index, :create, :show, :edit, :update, :destroy]
     resources :products,only:[:index,:show]
     #ジャンル検索機能アクション
     get 'search/:id' => "products#search", as: 'search_products'
+    get 'namesearch' => "products#name_search", as: 'name_search'
 
     resources :cart_products, only:[:index, :update, :destroy]
     post "cart_product/:id" => "cart_products#create",as: "cart_products_create"

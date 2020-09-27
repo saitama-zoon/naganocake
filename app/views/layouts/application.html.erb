@@ -4,33 +4,37 @@
     <title>Naganocake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style= "background-color: #FFF;">
-     <header class="navbar navbar-fixed-top navbar-default ">
+  <body style="background-color: #FFF">
+    <header class="navbar navbar-default">
       <div class="container">
-
-       <nav class="nav navbar-nav navbar-left">
-         <%= link_to image_tag("logo.png", class: "logo"), home_path %>
+        <nav class="nav navbar-nav navbar-left">
+          <%= link_to image_tag("logo.png", class: "logo"), home_path %>
         </nav>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if customer_signed_in? %>
+              <li><%= link_to 'マイページ', customer_path, class: '' %></li>
+              <li><%= link_to '商品一覧', products_path, class: '' %></li>
+              <li><%= link_to 'カート', cart_products_path, class: '' %></li>
+              <li><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: '' %></li>
+              <div class="seach-window pull-bottom">
+                <%= form_with url:name_search_path,:method => 'get',local: true,skip_enforcing_utf8: true do |f| %>
+                  <%= f.collection_select(:category_id,Category.where(is_effective: "true" ),:id,:name) %>
+                  <%= f.text_field :search %>
+                  <%= f.submit '検索',name: nil %>
+                <% end %>
+              </div>
 
-              <li class="nav-list"><%= link_to 'マイページ', customer_path, class: '' %></li>
-              <li class="nav-list"><%= link_to '商品一覧', products_path, class: '' %></li>
-              <li class="nav-list"><%= link_to 'カート', cart_products_path, class: '' %></li>
-
-              <li class="nav-list"><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: '' %></li>
-              <% elsif admin_signed_in? %>
-              <li class="nav-list"><%= link_to '商品一覧', admins_products_path, class: '' %></li>
-              <li class="nav-list"><%= link_to '会員一覧', admins_customers_path, class: '' %></li>
-              <li class="nav-list"><%= link_to '注文履歴一覧', admins_orders_path, class: '' %></li>
-              <li class="nav-list"><%= link_to 'ジャンル一覧', admins_categories_path, class: '' %></li>
-              <li class="nav-list"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: '' %></li>
+            <% elsif admin_signed_in? %>
+              <li><%= link_to '商品一覧', admins_products_path, class: '' %></li>
+              <li><%= link_to '会員一覧', admins_customers_path, class: '' %></li>
+              <li><%= link_to '注文履歴一覧', admins_orders_path, class: '' %></li>
+              <li><%= link_to 'ジャンル一覧', admins_categories_path, class: '' %></li>
+              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: '' %></li>
             <% else %>
               <li class="nav-list"><%= link_to 'About', about_path, class: '' %></li>
               <li class="nav-list"><%= link_to '商品一覧', products_path, class: '' %></li>
@@ -39,11 +43,11 @@
             <% end %>
           </ul>
         </nav>
-
       </div>
     </header>
-
-    <%= yield %>
-    <!--<footer class="navbar navbar-default navbar-fixed-bottom "></footer>-->
+    <div class="wrapper">
+      <%= yield %>
+    </div>
+    <footer style="background-color: #F8F8F8"></footer>
   </body>
 </html>
