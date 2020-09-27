@@ -3,9 +3,8 @@ class Customers::ProductsController < ApplicationController
   def index
     @products = Product.all
     @categories = Category.where(is_effective: "true" )
-    @products = Product.page(params[:page]).per(8)
+    @products = Product.where(is_sale_status: "true").page(params[:page]).per(8)
     @title = "商品"
-
   end
 
   def show
