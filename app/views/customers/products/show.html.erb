@@ -18,18 +18,26 @@
       </table>
     </div>
 
-    <div class="col-lg-6" style="text-align: center; padding-top: 20px;">
-      <%= attachment_image_tag @product, :image, size: "300x200", format: 'jpeg', fallback: 'no_image.png' %>
+    <div class="col-lg-5" style="text-align: center; padding-top: 30px;">
+      <%= attachment_image_tag @product, :image, :fill, 300, 200, format: 'jpeg', fallback: 'no_image.png' %>
     </div>
-    <div class="col-lg-4">
-      <strong><span style="font-size: 25px;"><%= @product.name %></span></strong><br>
-      <%= @product.introduction %><br>
-      <p><strong><span style="font-size: 20px;">¥ <%= @tax.to_i %></span></strong>(税込)</p>
-      <!--個数選択-->
-      <%= form_for @cart_product,:url=>{controller:"customers/cart_products",action:"create"} do |f| %>
-        <%= f.select :quantity, options_for_select(1..10,selected: 1), include_blank: "個数を選択" %>
-        <%= f.submit "カートに入れる", class: "btn btn-primary" %>
-      <% end %>
+
+    <div class="col-lg-5" style="text-align: center; padding-top: 30px;">
+      <p style="font-size: 25px; padding-right: 300px;">
+        <strong><%= @product.name %>     </strong>
+      </p>
+      <p style="padding-right: 300px; padding-top: 10px;">
+        <%= @product.introduction %>
+      </p>
+      <p style="font-size: 18px; padding-right: 350px; padding-top: 80px;">
+        <strong>¥ <%= @tax.to_i %></strong>(税込)
+      </p>
+    </div>
+    <div style="text-align: right;">
+        <%= form_for @cart_product do |f| %>
+          <%= f.select :quantity, options_for_select(1..10), include_blank: "個数を選択" %>
+          <%= link_to "カートに入れる", cart_products_create_path(@product), method: :post, class: "btn btn-primary" %>
+        <% end %>
     </div>
   </div>
 </div>

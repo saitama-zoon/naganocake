@@ -10,7 +10,7 @@ class Customers::CartProductsController < ApplicationController
 			tax_subtotal_price=(subtotal_price*1.1).floor
 			#小径の切り捨て価格を計算した後に合計金額に加算
 			@total_price += tax_subtotal_price
-			binding.pry
+			#binding.pry
 		end
 	end
 

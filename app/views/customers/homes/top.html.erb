@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-2">
-      <table class="table" style="border: 1px solid #696969; height: 100px">
+      <table class="table" style="border: 1px solid #696969; height: 100px;">
         <thead>
           <tr>
             <th>ジャンル検索</th>
@@ -34,9 +34,9 @@
         <strong>オススメ商品</strong>
       </h2>
       <% @products.each do |product| %>
-        <div class="box" style="float:left; margin-right:0px;">
+        <div class="box" style="float:left; margin-right:0px; padding-right: 15px">
           <%= link_to product_path(product.id) do %>
-            <%= attachment_image_tag product, :image, size: "160x110", format: 'jpeg', fallback: 'no_image.png' %>
+            <%= attachment_image_tag product, :image, :fill, 180, 100, format: 'jpeg', fallback: 'no_image.png' %>
           <% end %>
 　　　　   <p><strong><%= product.name %></strong></p>
 　　　　   <p><strong>¥<%= product.price %></strong></p>
