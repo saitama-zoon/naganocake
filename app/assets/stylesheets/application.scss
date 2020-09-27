@@ -21,33 +21,36 @@
   box-sizing: border-box;
 }
 
-header{
-	height: 100px;
+
+header {
+  height: 100px;
 }
-.logo{
-	padding-top: 17px;
+
+.logo {
+  padding-top: 17px;
 }
 
 ul {
   padding-top: 25px;
 }
 
-
 body{
 	padding-top: 150px;
 }
+
 .navbar-nav > li > a {
 	color: #800000;
 }
 
-
-
 .wrapper {
   min-height: calc(100vh - 100px);
 }
+
 footer {
   height: 100px;
 }
 
+
  @import "bootstrap-sprockets";
  @import "bootstrap";
+

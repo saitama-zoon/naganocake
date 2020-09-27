@@ -45,7 +45,7 @@ class Customers::OrdersController < ApplicationController
         order_product.order_id = @order.id
         order_product.product_id = cart_puroduct.product_id
         order_product.quantity = cart_puroduct.quantity
-        order_product.price_with_tax = cart_puroduct.product.price
+        order_product.price_with_tax = cart_puroduct.product.price*11/10
         order_product.save
         #order_productに情報を移したらcart_puroductは消去
         cart_puroduct.destroy
