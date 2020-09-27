@@ -20,7 +20,7 @@
 
     <div class="col-lg-10">
       <h2>
-        <strong>商品一覧</strong><span style="font-size: 20px;"> (全<%= @products.count %>件)</span>
+        <strong><%= @title %></strong><span style="font-size: 20px;"> (全<%= @products.count %>件)</span>
       </h2>
       <% @products.each do |product| %>
         <div class="box" style="float:left; margin-right:0px;">

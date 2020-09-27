@@ -3,6 +3,7 @@ class Customers::ProductsController < ApplicationController
   def index
     @products = Product.all
     @categories = Category.all
+    @title = "商品一覧"
   end
 
   def show
@@ -16,6 +17,7 @@ class Customers::ProductsController < ApplicationController
   	@products = Product.where(category_id: params[:id])
     @quantity = Product.where(category_id: params[:id]).count
     @categories = Category.where(is_effective: "true" )
+    @title = "できたぜ！"
     #binding.pry
     render 'index'
   end
