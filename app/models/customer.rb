@@ -7,12 +7,11 @@ class Customer < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :destinations, dependent: :destroy
 
-
-  validates :is_member, inclusion: { in: [true, false] }
+  enum is_member: {Available: true, Invalid: false}
   #有効会員はtrue、退会済み会員はfalse
    def active_for_authentication?
         super && (self.is_member === "Available")
-    end
+   end
   #is_memberが有効の場合は有効会員(ログイン可能)
 
   has_many :cart_products, dependent: :destroy
