@@ -2,7 +2,8 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :order_products, dependent: :destroy
 
-  has_many :products
+  has_many :products, :through => :order_products
+  accepts_nested_attributes_for :order_products
 
 
   validates :address, presence: true, length: {maximum: 35, minimum: 2}

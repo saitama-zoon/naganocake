@@ -4,7 +4,11 @@ class Customers::OrdersController < ApplicationController
 
 
   def new
+    if current_customer.cart_products == []
+      redirect_to cart_products_path
+    else
     @order = Order.new
+  end
   end
 
   def create
@@ -45,7 +49,7 @@ class Customers::OrdersController < ApplicationController
         order_product.order_id = @order.id
         order_product.product_id = cart_puroduct.product_id
         order_product.quantity = cart_puroduct.quantity
-        order_product.price_with_tax = cart_puroduct.product.price*11/10
+        order_product.price_with_tax = cart_puroduct.product.price*11/10.floor
         order_product.save
         #order_productに情報を移したらcart_puroductは消去
         cart_puroduct.destroy
@@ -59,7 +63,6 @@ class Customers::OrdersController < ApplicationController
 
   def index
     @orders = @customer.orders
-    binding.pry
   end
 
   def show
@@ -94,16 +97,22 @@ class Customers::OrdersController < ApplicationController
         #new view プルダウン部で定義したselect_to_addressより値を取得
         #登録済み住所の情報取得メソッド...要動作確認
         @sta = params[:order][:send_to_address].to_i
+        unless @sta == 0
         @send_to_address = Destination.find(@sta)
         @order.postal_code = @send_to_address.postal_code
         @order.address = @send_to_address.address
         @order.name = @send_to_address.name
+        end
       when 3
         #新規発送先
         #:new_add→new viewにて定義
         @order.postal_code = params[:order][:new_add][:postal_code]
         @order.address = params[:order][:new_add][:address]
         @order.name = params[:order][:new_add][:name]
+    end
+    if @order.postal_code == "" || @order.address == "" || @sta == 0
+      redirect_to new_order_path
+      flash[:danger] = '!!! 未入力項目があります !!!'
     end
   end
 
