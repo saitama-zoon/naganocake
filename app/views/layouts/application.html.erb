@@ -8,8 +8,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header class="navbar navbar-default">
+  <body style="background-color: #FFF">
+    <header class="navbar navbar-fixed-top navbar-default">
       <div class="container">
         <nav class="nav navbar-nav navbar-left">
           <%= link_to image_tag("logo.png", class: "logo"), home_path %>
@@ -38,8 +38,10 @@
       </div>
     </header>
 
-    <%= yield %>
+    <div class="wrapper">
+      <%= yield %>
+    </div>
 
-    <footer class="navbar navbar-default"></footer>
+    <footer style="background-color: #F8F8F8"></footer>
   </body>
 </html>

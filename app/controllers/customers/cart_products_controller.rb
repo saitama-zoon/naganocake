@@ -3,8 +3,15 @@ class Customers::CartProductsController < ApplicationController
 	before_action :setup_cart_product!, only: [:create]
 
 	def index
-		@cart_products=current_customer.cart_products
-
+		@cart_products = current_customer.cart_products
+		@total_price=0
+		@cart_products.each do |item|
+			subtotal_price=item.product.price*item.quantity
+			tax_subtotal_price=(subtotal_price*1.1).floor
+			#小径の切り捨て価格を計算した後に合計金額に加算
+			@total_price += tax_subtotal_price
+			#binding.pry
+	    end
 	end
 
 	def create

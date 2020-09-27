@@ -20,12 +20,16 @@
   box-sizing: border-box;
 }
 
-body {
-  height: 100%;
-}
-
 header {
   height: 100px;
+}
+
+body {
+  padding-top: 150px;
+}
+
+.wrapper {
+  min-height: calc(100vh - 100px);
 }
 
 .logo {
@@ -38,8 +42,6 @@ ul {
 
 footer {
   height: 100px;
-  width: 100%;
-  padding-bottom: 0;
 }
 
  @import "bootstrap-sprockets";
