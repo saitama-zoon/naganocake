@@ -75,9 +75,9 @@
             <tr>
               <td style="border: none;"><strong>会員ステータス</strong></td>
               <td style="border: none;">
-                <%= f.radio_button :is_member, :true %>
-                <%= f.label :is_member, "有効", {value: true} %>
-                <%= f.radio_button :is_member, :false %>
+                <%= f.radio_button :is_member, :Available %>
+                <%= f.label :is_member, "有効", {value: true } %>
+                <%= f.radio_button :is_member, :Invalid %>
                 <%= f.label :is_member, "無効", {value: false} %>
               </td>
             </tr>

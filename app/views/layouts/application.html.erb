@@ -9,12 +9,12 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style= "">
-     <header class="navbar navbar-fixed-top" style="background: linear-gradient(#FFDDC7, #FFE593)">
+  <body style= "background: #F8F8F8">
+     <header class="navbar navbar-fixed-top" style="background: #D19F9C">
       <div class="container">
 
        <nav class="nav navbar-nav navbar-left">
-         <%= link_to image_tag("logo.png", class: "logo"), home_path %>
+         <%= link_to image_tag("logokuro.png", class: "logo"), home_path %>
         </nav>
         <nav>
           <ul class="nav navbar-nav navbar-right">
@@ -45,6 +45,6 @@
     <div class="wrapper">
     <%= yield %>
     </div>
-    <footer style="background: linear-gradient(#FFDDC7, #FFE593)"></footer>
+    <footer style="background: #D19F9C"></footer>
   </body>
 </html>
