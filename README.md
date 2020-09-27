@@ -1,24 +1,47 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#Name
+naganocake made_by:saitama-zone
 
-Things you may want to cover:
+# DEMO
 
-* Ruby version
+(https://user-images.githubusercontent.com/67775645/94335183-cc305e80-0014-11eb-92ab-0a948ba21d1a.png)
 
-* System dependencies
+# Features
 
-* Configuration
+This application was created by a DMM webcamp's task
+It is an EC site of a fictitious pastry shop called Nagano Cake.
 
-* Database creation
+It covers the services of the EC site, for example, you can post products as an administrator or purchase products as a customer.
 
-* Database initialization
+# Requirement
 
-* How to run the test suite
+* rails 5.2.4.4
+* devise
+* bootstrap-sass  3.3.6
+* jquery-rails
+* refile
+* refile-mini_magick
+* kaminari 1.2.1
+* pry-rails
+* enum_help
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+# Usage
 
-* ...
+```bash
+git clone https://github.com/saitama-zoon/naganocake.git
+cd naganocake
+rails s
+
+```
+
+# Note
+
+Administrator login privileges are listed in the seed file
+
+# Author
+
+* kura,masamitsu,toda-chan,totsu
+* @DMM_web_camp
+

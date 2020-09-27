@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
    <div class='col-lg-6 col-lg-offset-4' >
-      <h2 style="font-size: 25px; padding-bottom: 10px; padding-left: 30px;"><span style="background-color:#f8f8f8;">　管理者ログイン　</span></h2>
+      <h3 style="padding-bottom: 10px; padding-left: 35px;"><span style="background-color:#f8f8f8;">　管理者ログイン　</span></h3>
       <%= form_for(resource, as: resource_name, url: session_path(      resource_name)) do |f| %>
         <div class="field">
           <%= f.label :メールアドレス %><br />
@@ -13,8 +13,8 @@
           <%= f.password_field :password, autocomplete: "      パスワードを入力してください" , :size => "40*30"%>
         </div>
 
-        <div class="actions" style="margin-top: 10px; padding-left: 110px;">
-          <%= f.submit "ログイン" %>
+        <div class="actions" style="margin-top: 10px; padding-left: 105px;">
+          <%= f.submit "ログイン", class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>

@@ -24,20 +24,20 @@ header {
   height: 100px;
 }
 
-body {
-  padding-top: 150px;
-}
-
-.wrapper {
-  min-height: calc(100vh - 100px);
-}
-
 .logo {
   padding-top: 17px;
 }
 
 ul {
   padding-top: 25px;
+}
+
+body{
+	padding-top: 150px;
+}
+
+.wrapper {
+  min-height: calc(100vh - 100px);
 }
 
 footer {
