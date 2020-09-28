@@ -1,92 +1,94 @@
-<!-- Bootstrapのclass  要調整 -->
-<div class=" container ">
-  <h2 class="text-danger bg-warning"><%= flash[:danger] %></h2>
+<div class="container">
   <div class="row">
-    <% if flash[:danger] %>
-      <p><%= flash[:danger] %></p>
-    <% end %>
-    <div class="col-lg-4">
-      <h4><mark style="background-color: #F8F8F8F8;">注文情報入力</mark></h4>
-    </div>
-  </div>
+    <h2 class="text-danger bg-warning"><%= flash[:danger] %></h2>
+    <div class="row">
+      <% if flash[:danger] %>
+        <p><%= flash[:danger] %></p>
+      <% end %>
 
-  <%= form_with(model: @order, local: true, url: {action: 'confirm'}) do |f| %>
-    <div class="row space">
-      <h5><strong><%= f.label :支払い方法 %></strong></h5>
+      <div class="col-lg-4">
+        <h4><mark style="background-color: #F8F8F8F8;">注文情報入力</mark></h4>
+      </div>
     </div>
-    <!-- 支払い方法選択ラジオボタン -->
-    <div class="row field">
-      <div class="col-lg-4 btn-group" data-togle="buttons">
-        <p>
-          <label class="btn btn-outline-secondary" >
+
+    <%= form_with(model: @order, local: true, url: {action: 'confirm'}) do |f| %>
+      <div class="row space">
+        <h5><strong><%= f.label :支払い方法 %></strong></h5>
+      </div>
+      <!-- 支払い方法選択ラジオボタン -->
+      <div class="row field">
+        <div class="col-lg-4 btn-group" data-togle="buttons">
+          <p>
+            <label class="btn btn-outline-secondary" >
             <!-- :how_to_pay→confirm actionへparamを渡す -->
-            <%= f.radio_button :how_to_pay, 2, {checked: true} %>クレジットカード
-          </label>
-        </p>
+              <%= f.radio_button :how_to_pay, 2, {checked: true} %>クレジットカード
+            </label>
+          </p>
+          <p>
+            <label class="btn btn-outline-secondary">
+              <%= f.radio_button :how_to_pay, 1, {} %>銀行振込
+            </label>
+          </p>
+        </div>
+      </div>
+      <!-- 配送先入力フォーム -->
+      <div class="row">
+        <h5><strong><%= f.label :お届け先 %></strong></h5>
+      </div>
+      <!-- 自身の住所 -->
+      <div class="row">
         <p>
           <label class="btn btn-outline-secondary">
-            <%= f.radio_button :how_to_pay, 1, {} %>銀行振込
-          </label>
+            <%= f.radio_button :add, 1, checked: true,checked: "checked" %>ご自身の住所
+          </label><br>
+          <!-- customers(current_customer) テーブルより出力 -->
+          <%= @customer.postal_code %>
+          <%= @customer.address %><br>
+          <%= @customer.first_name + @customer.last_name %>
         </p>
       </div>
-    </div>
-    <!-- 配送先入力フォーム -->
-    <div class="row">
-      <h5><strong><%= f.label :お届け先 %></strong></h5>
-    </div>
-    <!-- 自身の住所 -->
-    <div class="row">
-      <p>
-        <label class="btn btn-outline-secondary"><%= f.radio_button :add, 1, checked: true,checked: "checked" %>
-        ご自身の住所
-        </label><br>
-        <!-- customers(current_customer) テーブルより出力 -->
-        <%= @customer.postal_code %>
-        <%= @customer.address %><br>
-        <%= @customer.first_name + @customer.last_name %>
-      </p>
-    </div>
-    <!-- 登録済み住所 -->
-    <div class="row">
-      <p>
-        <label class="btn btn-outline-secondary">
-          <%= f.radio_button :add, 2, style: "" %>登録住所から選択
-        </label><br>
-        <!-- プルダウン機能 :send_to_address→confirm actionへparamを渡す -->
-        <!-- :select_destはorder.rbでカラムを結合したメソッド -->
-        <%= f.collection_select :send_to_address, @customer.destinations, :id, :full_dest,prompt:"--住所を選択してください--" %>
-      </p>
-    </div>
-    <!-- 新しい配送先 -->
-    <div class="row">
-      <p>
-        <label class="btn btn-outline-secondary">
-          <%= f.radio_button :add, 3, style: "" %>新しいお届け先
-        </label><br>
-      </p>
-      <div class="">
-        <!-- destinationモデルに対して編集 :new_add→comfirm actionへparamを渡す -->
-        <%= f.fields_for :new_add do |add|%>
-          <div class="row">
-            <div class="">
+      <!-- 登録済み住所 -->
+      <div class="row">
+        <p>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :add, 2, style: "" %>登録住所から選択
+          </label><br>
+          <!-- プルダウン機能 :send_to_address→confirm actionへparamを渡す -->
+          <!-- :select_destはorder.rbでカラムを結合したメソッド -->
+          <%= f.collection_select :send_to_address, @customer.destinations, :id, :full_dest,prompt:"--住所を選択してください--" %>
+        </p>
+      </div>
+      <!-- 新しい配送先 -->
+      <div class="row">
+        <p>
+          <label class="btn btn-outline-secondary">
+            <%= f.radio_button :add, 3, style: "" %>新しいお届け先
+          </label><br>
+        </p>
+        <div class="">
+          <!-- destinationモデルに対して編集 :new_add→comfirm actionへparamを渡す -->
+          <%= f.fields_for :new_add do |add|%>
+            <div class="row">
+              <div class="">
                 <p>郵便番号(ハイフンなし)</p>
                 <p><%= add.text_field :postal_code, class: "form-control", style: "width: 100px;" %></p>
-            </div>
-            <div class="">
-              <p>住所</p>
-              <p><%= add.text_field :address, class: "form-control",  style: "width: 400px;" %></p>
-            </div>
-            <div class="">
-              <p>宛名</p>
-              <p><%= add.text_field :name, class: "form-control", style: "width: 150px;" %></p>
-            </div>
-        <% end %>
-      </div>
+              </div>
+              <div class="">
+                <p>住所</p>
+                <p><%= add.text_field :address, class: "form-control",  style: "width: 400px;" %></p>
+              </div>
+              <div class="">
+                <p>宛名</p>
+                <p><%= add.text_field :name, class: "form-control", style: "width: 150px;" %></p>
+              </div>
+          <% end %>
+        </div>
     </div>
 
     <!-- 確認画面へ進むボタン -->
-    <div class="actions row" style="text-align: center;">
+    <div class="actions row" style="text-align: center; padding-bottom: 100px; ">
       <%= f.submit "確認画面へ進む",class: "btn btn-primary" %>
     </div>
   <% end %>
+  </div>
 </div>
