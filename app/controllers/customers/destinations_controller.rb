@@ -20,8 +20,9 @@ class Customers::DestinationsController < ApplicationController
       flash[:notice] = "You have created destination successfully."
       redirect_to destinations_path
     else
-      @destinations = Destination.all
-      render :index
+      @customer = current_customer
+      @destinations = @customer.destinations
+      render action: :index
     end
   end
 

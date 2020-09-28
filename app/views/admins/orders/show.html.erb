@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h4 style="padding-bottom: 10px; padding-left: 20px;"><span style="background-color:#f8f8f8;">注文履歴詳細</span></h4>
+    <h4 style="padding-bottom: 10px; padding-left: 20px;"><span style="background-color:#D5D7DD;">注文履歴詳細</span></h4>
     <%= form_for(@order, url:admins_order_path(@order), method: :patch) do |f| %>
       <div class="col-lg-8">
         <table class="table table-noborder" style="width: 500px">
@@ -27,6 +27,7 @@
           </tbody>
         </table>
       </div>
+      <% end %>
       <div class="col-lg-9">
         <table class="table" style="width: 800px">
           <thead>
@@ -39,17 +40,19 @@
             </tr>
           </thead>
           <tbody>
-            <%= f.fields_for :order_products do |i| %>
+            <% @product.each do |product| %>
+            <%= form_for product,url:admins_order_product_update_path(product),method: :patch do |f| %>
               <tr>
-                  <td><%= product = Product.find(i.object.product_id).name %></td>
-                  <td><%= i.object.price_with_tax %></td>
-                  <td><%= i.object.quantity %></td>
-                  <td><%= i.object.price_with_tax * i.object.quantity %></td>
+                  <td><%= Product.find(product.product_id).name %></td>
+                  <td><%= product.price_with_tax %></td>
+                  <td><%= product.quantity %></td>
+                  <td><%= product.price_with_tax * product.quantity %></td>
                   <td>
-                    <%= i.select :product_status, OrderProduct.product_statuses.keys.map {|l| [I18n.t("enums.order_product.product_status.#{l}"), l]}  %>
+                    <%= f.select :product_status, OrderProduct.product_statuses.keys.map {|k| [I18n.t("enums.order_product.product_status.#{k}"), k]}  %>
                     <%= f.submit '更新', class: 'btn btn-primary btn-xs' %>
                   </td>
               </tr>
+              <% end %>
             <% end %>
           </tbody>
         </table>
@@ -63,7 +66,7 @@
           <tbody>
             <% sum_all = 0 %>
             <% @order.order_products.each do |order_product| %>
-              <% sum_all += order_product.price_with_tax %>
+              <% sum_all += order_product.price_with_tax*order_product.quantity %>
             <% end %>
             <tr>
               <td style="border: none;"><strong>商品合計</strong></td>
@@ -80,6 +83,5 @@
           </tbody>
         </table>
       </div>
-    <% end %>
   </div>
 </div>
