@@ -1,23 +1,24 @@
 class Customers::ProductsController < ApplicationController
 
   def index
-    @products = Product.all
-    @categories = Category.where(is_effective: "true" )
-    @products = Product.where(is_sale_status: "true").page(params[:page]).per(8)
+    @categories = Category.where(is_effective: "true")
+    effective_products = Product.includes(:category).where(categories: {is_effective: true})
+    @products = effective_products.where(is_sale_status: true).page(params[:page]).per(8)
     @title = "商品"
+    #binding.pry
   end
 
   def show
   	@product = Product.find(params[:id])
   	@cart_product = CartProduct.new
-  	@categories = Category.where(is_effective: "true" )
+  	@categories = Category.where(is_effective: "true")
     @tax = @product.price * 1.1
   end
   #ジャンル検索機能
   def search
-  	@products = Product.where(category_id: params[:id]).where(is_sale_status: "true" ).page(params[:page]).per(8)
+  	@products = Product.where(category_id: params[:id]).where(is_sale_status: "true").page(params[:page]).per(8)
     @quantity = Product.where(category_id: params[:id]).count
-    @categories = Category.where(is_effective: "true" )
+    @categories = Category.where(is_effective: "true")
     category = Category.find(params[:id])
     @title = category.name
     #binding.pry
@@ -26,16 +27,21 @@ class Customers::ProductsController < ApplicationController
 
   def name_search
 
-    if params[:category_id]==""
-      category=Product.all
+    if params[:category_id] == ""
+      category = Product.all
     elsif
-    category=Product.where(category_id: params[:category_id])
+    effective_category = Product.includes(:category).where(categories: {is_effective: true})
+    category = effective_category.where(category_id: params[:category_id])
     end
-    product=category.where(['name LIKE?',"%#{params[:search]}%"])
-    @products=product.page(params[:page]).per(8)
-    @quantity=product.count
-    @categories=Category.where(is_effective: "true" )
-    @title = "検索結果"
+
+    product = category.where(['name LIKE?', "%#{params[:search]}%"])
+    product_on_sales = product.where(is_sale_status: "true")
+    @products = product_on_sales.page(params[:page]).per(8)
+    #binding.pry
+    @quantity = product_on_sales.count
+    @categories = Category.where(is_effective: "true")
+     @title = "検索結果"
+
     render action: :index
   end
 
