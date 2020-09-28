@@ -11,8 +11,8 @@ class Order < ApplicationRecord
 
   enum payment_method: {
     Not_set: 0,
-    Bank_transfer: 1,
-    Credit_card: 2
+    Credit_card: 1,
+    Bank_transfer: 2,
   }
 
   enum order_status: {

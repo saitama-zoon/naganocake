@@ -6,7 +6,7 @@
       </div>
       <div class="row o-3column">
         　<div class="col-lg-3" >
- 　　        <%= attachment_image_tag @product, :image, :fill, 300, 200, format: 'jpeg', fallback: 'no_image.png' %>
+ 　　        <%= attachment_image_tag @product, :image, :fill, 300, 200, format: 'jpeg', fallback: 'no_image.png', size: "300x200" %>
  　　        <%= f.attachment_field :image %>
  　　     </div>
          <div class="col-lg-9">
