@@ -21,7 +21,7 @@ class Admins::OrdersController < ApplicationController
 
 
 
-    binding.pry
+    #binding.pry
     @order.update(order_params)
     redirect_to admins_order_path
   end

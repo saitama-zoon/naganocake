@@ -59,6 +59,7 @@ class Customers::OrdersController < ApplicationController
 
   def index
     @orders = @customer.orders
+    binding.pry
   end
 
   def show
@@ -104,6 +105,12 @@ class Customers::OrdersController < ApplicationController
         @order.address = params[:order][:new_add][:address]
         @order.name = params[:order][:new_add][:name]
     end
+
+    if @order.name.blank? && @order.address.blank? && @order.postal_code.blank?
+      flash[:danger] = '!!! 送り先住所に正しい値を入力してください !!!'
+      render "new"
+    end
+    binding.pry
   end
 
 
