@@ -15,7 +15,7 @@ class Customers::ProductsController < ApplicationController
   end
   #ジャンル検索機能
   def search
-  	@products = Product.where(category_id: params[:id]).page(params[:page]).per(8)
+  	@products = Product.where(category_id: params[:id]).where(is_sale_status: "true" ).page(params[:page]).per(8)
     @quantity = Product.where(category_id: params[:id]).count
     @categories = Category.where(is_effective: "true" )
     category = Category.find(params[:id])
