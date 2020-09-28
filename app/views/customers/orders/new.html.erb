@@ -20,12 +20,12 @@
         <p>
           <label class="btn btn-outline-secondary" >
             <!-- :how_to_pay→confirm actionへparamを渡す -->
-            <%= f.radio_button :how_to_pay, 1, {checked: true} %>クレジットカード
+            <%= f.radio_button :how_to_pay, 2, {checked: true} %>クレジットカード
           </label>
         </p>
         <p>
           <label class="btn btn-outline-secondary">
-            <%= f.radio_button :how_to_pay, 2, {} %>銀行振込
+            <%= f.radio_button :how_to_pay, 1, {} %>銀行振込
           </label>
         </p>
       </div>
