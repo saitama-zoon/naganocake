@@ -1,7 +1,7 @@
 class Customers::ProductsController < ApplicationController
 
   def index
-    @products = Product.all
+    #@products = Product.all
     @categories = Category.where(is_effective: "true" )
     @products = Product.where(is_sale_status: "true").page(params[:page]).per(8)
     @title = "商品"
