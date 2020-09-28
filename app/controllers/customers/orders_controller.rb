@@ -110,7 +110,7 @@ class Customers::OrdersController < ApplicationController
       flash[:danger] = '!!! 送り先住所に正しい値を入力してください !!!'
       render "new"
     end
-    binding.pry
+    #binding.pry
   end
 
 

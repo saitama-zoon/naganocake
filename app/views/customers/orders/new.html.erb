@@ -1,6 +1,9 @@
 <!-- Bootstrapのclass  要調整 -->
 <div class=" container ">
   <div class="row">
+    <% if flash[:danger] %>
+      <p><%= flash[:danger] %></p>
+    <% end %>
     <div class="col-lg-4">
       <h4><mark style="background-color: #F8F8F8F8;">注文情報入力</mark></h4>
     </div>
