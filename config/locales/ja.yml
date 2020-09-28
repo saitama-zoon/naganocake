@@ -214,7 +214,7 @@ ja:
         Waiting_for_payment: 入金待ち
         Payment_confirmation: 入金確認
         In_production: 制作中
-        Ready_to_ship: 発注準備中
+        Ready_to_ship: 発送準備中
         Sent: 発送済み
     order_product:
       product_status:

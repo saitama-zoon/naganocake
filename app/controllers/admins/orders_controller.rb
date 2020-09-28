@@ -12,17 +12,20 @@ class Admins::OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find(params[:id])
+    order = Order.find(params[:id])
 
     #以下、文字列で値を取得する...
-    @order_str = params[:order][:order_status]
+    order_str = params[:order][:order_status]
     #@product_str = @order.find(id: [:order][:id][:product_status])
-    @product_str = params[:order][:order_products_attributes][:product_status]
+    #@product_str = params[:order][:order_products_attributes][:product_status]
 
+    products=order.order_products
+    #binding.pry
+    if order_str == "Payment_confirmation"
+    products.update_all(product_status: 1)
+    end
 
-
-    binding.pry
-    @order.update(order_params)
+    order.update(order_params)
     redirect_to admins_order_path
   end
 
@@ -30,8 +33,8 @@ class Admins::OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(
-      :created_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status,
-      order_products_attributes: [:id, :product_id, :order_id, :quantity, :price_with_tax, :product_status]
+      :created_at, :postal_code, :address, :name, :shipping, :payment_method, :order_status
       )
   end
+
 end

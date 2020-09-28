@@ -25,8 +25,13 @@ class Customers::ProductsController < ApplicationController
   end
 
   def name_search
+
+    if params[:category_id]==""
+      category=Product.all
+    elsif
     category=Product.where(category_id: params[:category_id])
-    product=category.where(['name LIKE?',"%#{params[:seach]}%"])
+    end
+    product=category.where(['name LIKE?',"%#{params[:search]}%"])
     @products=product.page(params[:page]).per(8)
     @quantity=product.count
     @categories=Category.where(is_effective: "true" )

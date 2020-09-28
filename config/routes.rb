@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :edit, :create, :update]
     resources :order_products, only: [:update]
     get 'home' => "homes#home", as: 'home'
+    patch 'order_product/:id' => "order_products#update",as: 'order_product_update'
   end
 
 end

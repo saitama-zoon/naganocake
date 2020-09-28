@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   has_many :products, :through => :order_products
   accepts_nested_attributes_for :order_products
 
+
   validates :address, presence: true, length: {maximum: 35, minimum: 2}
   validates :postal_code, presence: true, length: {maximum: 10, minimum: 2}
   validates :name, presence: true, length: {maximum: 50, minimum: 3}
