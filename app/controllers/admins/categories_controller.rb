@@ -19,6 +19,13 @@ class Admins::CategoriesController < ApplicationController
 
   def update
   	@category = Category.find(params[:id])
+    products=@category.products
+    #binding.pry
+    if params[:category][:is_effective] == "false"
+        products.update_all(is_sale_status: false)
+    else
+        products.update_all(is_sale_status: true)
+    end
     @category.update(category_params)
     redirect_to admins_categories_path
   end

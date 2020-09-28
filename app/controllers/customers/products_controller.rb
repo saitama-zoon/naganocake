@@ -27,21 +27,25 @@ class Customers::ProductsController < ApplicationController
 
   def name_search
 
+    #ジャンルが非選択時、全てのジャンルを定義
     if params[:category_id] == ""
-      category = Product.all
+      category = Product.includes(:category).where(categories: {is_effective: true})
     elsif
-    effective_category = Product.includes(:category).where(categories: {is_effective: true})
-    category = effective_category.where(category_id: params[:category_id])
+      #販売中の商品のみ取得
+      effective_category = Product.includes(:category).where(categories: {is_effective: true})
+      #販売中かつ有効なジャンルのみ取得
+      category = effective_category.where(category_id: params[:category_id])
     end
+    #販売中かつ有効なジャンルの商品より、指定された名称の商品を取得
+    #ここが空欄だとそのようなカラムは存在しないため、SQLエラーが出力されると思われる。
+    #product = category.where(['name LIKE?', "%#{params[:search]}%"])
 
-    product = category.where(['name LIKE?', "%#{params[:search]}%"])
+    product = category.where(['products.name LIKE?', "%#{params[:search]}%"])
     product_on_sales = product.where(is_sale_status: "true")
     @products = product_on_sales.page(params[:page]).per(8)
-    #binding.pry
     @quantity = product_on_sales.count
     @categories = Category.where(is_effective: "true")
      @title = "検索結果"
-
     render action: :index
   end
 
