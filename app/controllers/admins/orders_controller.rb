@@ -24,7 +24,6 @@ class Admins::OrdersController < ApplicationController
     if order_str == "Payment_confirmation"
     products.update_all(product_status: 1)
     end
-
     order.update(order_params)
     redirect_to admins_order_path
   end
