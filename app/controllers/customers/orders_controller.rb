@@ -63,7 +63,7 @@ class Customers::OrdersController < ApplicationController
 
   def index
     @orders = @customer.orders
-    binding.pry
+    #binding.pry
   end
 
   def show

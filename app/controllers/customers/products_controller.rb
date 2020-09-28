@@ -33,12 +33,15 @@ class Customers::ProductsController < ApplicationController
     effective_category = Product.includes(:category).where(categories: {is_effective: true})
     category = effective_category.where(category_id: params[:category_id])
     end
+
     product = category.where(['name LIKE?', "%#{params[:search]}%"])
     product_on_sales = product.where(is_sale_status: "true")
     @products = product_on_sales.page(params[:page]).per(8)
     #binding.pry
     @quantity = product_on_sales.count
     @categories = Category.where(is_effective: "true")
+     @title = "検索結果"
+
     render action: :index
   end
 

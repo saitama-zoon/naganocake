@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show, :new, :create, :edit, :update]
     resources :categories, only: [:index, :edit, :create, :update]
     resources :order_products, only: [:update]
+    post "orders/:id" => "orders#individual", as: "individual_orders"
     get 'home' => "homes#home", as: 'home'
     patch 'order_product/:id' => "order_products#update",as: 'order_product_update'
   end

@@ -23,5 +23,6 @@ class Order < ApplicationRecord
     Ready_to_ship: 3,
     Sent: 4
   }
+#修正
 
 end
