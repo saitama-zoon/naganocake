@@ -10,9 +10,11 @@
 
 
   <body style= "background: #F8F8F8">
+          <% if notice %>
+            <p class="alert alert-notice"><%= notice %></p>
+        <% end %>
      <header class="navbar navbar-fixed-top" style="background: #D19F9C">
       <div class="container">
-
        <nav class="nav navbar-nav navbar-left">
          <%= link_to image_tag("logokuro.png", class: "logo"), home_path %>
         </nav>
