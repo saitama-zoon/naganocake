@@ -6,6 +6,11 @@ class Admins::OrdersController < ApplicationController
     #binding.pry
   end
 
+  def individual
+    @orders = Order.where(customer_id: params[:id]).page(params[:page]).per(10)
+    render 'index'
+  end
+
   def show
     @order = Order.find(params[:id])
     @product = @order.order_products

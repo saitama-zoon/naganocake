@@ -63,10 +63,10 @@
           <% @order.order_products.each do |order_product| %>
             <tr>
               <td><%= product = Product.find(order_product.product_id).name %></td>
-              <td><%= order_product.price_with_tax*11/10 %></td>
+              <td><%= order_product.price_with_tax %></td>
               <td><%= order_product.quantity %></td>
               <td>
-                <%= order_product.price_with_tax*11/10*order_product.quantity %>
+                <%= order_product.price_with_tax*order_product.quantity %>
               </td>
             </tr>
           <% end %>
