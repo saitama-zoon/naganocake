@@ -20,12 +20,12 @@
         <p>
           <label class="btn btn-outline-secondary" >
             <!-- :how_to_pay→confirm actionへparamを渡す -->
-            <%= f.radio_button :how_to_pay, 1, {checked: true} %>クレジットカード
+            <%= f.radio_button :how_to_pay, 2, {checked: true} %>クレジットカード
           </label>
         </p>
         <p>
           <label class="btn btn-outline-secondary">
-            <%= f.radio_button :how_to_pay, 2, {} %>銀行振込
+            <%= f.radio_button :how_to_pay, 1, {} %>銀行振込
           </label>
         </p>
       </div>
@@ -70,22 +70,23 @@
           <div class="row">
             <div class="">
                 <p>郵便番号(ハイフンなし)</p>
-                <p><%= add.text_field :postal_code, class: "form-control", style: "width: 100px;" %></p>
+                <p><%= add.text_field :postal_code, class: "form-control", style: "width: 100px;",id:"customer_postcode" %></p>
             </div>
             <div class="">
               <p>住所</p>
-              <p><%= add.text_field :address, class: "form-control",  style: "width: 400px;" %></p>
+              <p><%= add.text_field :address, class: "form-control",  style: "width: 400px;",id:"customer_address" %></p>
             </div>
             <div class="">
               <p>宛名</p>
               <p><%= add.text_field :name, class: "form-control", style: "width: 150px;" %></p>
             </div>
+          </div>
         <% end %>
       </div>
     </div>
 
     <!-- 確認画面へ進むボタン -->
-    <div class="actions row" style="text-align: center;">
+    <div class="actions row" style="text-align: center; padding:50px;">
       <%= f.submit "確認画面へ進む",class: "btn btn-primary" %>
     </div>
   <% end %>

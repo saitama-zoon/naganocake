@@ -59,20 +59,20 @@
             </tr>
           </tbody>
         </table>
-      </div>
       <div class="">
         <p>
-          <span style="font-size: 25px;"><strong>支払方法</strong></span>
+          <span style="font-size: 15px;"><strong>支払方法</strong></span><br>
           <%= @order.payment_method_i18n %>
         <p>
       </div>
       <div class="">
         <p>
-          <span style="font-size: 25px;"><strong>お届け先</strong></span>
-          <%= @order.postal_code %>
-          <%= @order.address %>
-          <%= @order.name %>
+          <span style="font-size: 15px;"><strong>お届け先</strong></span><br>
+          〒<%= @order.postal_code %><br>
+          住所:<%= @order.address %><br>
+          宛名:<%= @order.name %><br>
         <p>
+      </div>
       </div>
       <%= f.hidden_field :how_to_pay, :value => "#{@order.payment_method}" %>
       <%= f.hidden_field :add, :value => "#{@add}" %>

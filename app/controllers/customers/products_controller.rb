@@ -35,6 +35,7 @@ class Customers::ProductsController < ApplicationController
     @products=product.page(params[:page]).per(8)
     @quantity=product.count
     @categories=Category.where(is_effective: "true" )
+    @title = "検索結果"
     render action: :index
   end
 
